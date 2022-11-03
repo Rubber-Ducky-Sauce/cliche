@@ -6,7 +6,11 @@ public class PlayerController : Actor
 {
     private new Rigidbody2D rigidbody;
     [SerializeField]private float jumpForce = 10f;
-    public bool hiding = false;
+    public bool isHiding = false;
+    public bool isCrouching = false;
+    private float crouchSpeed;
+    private float movementSpeed;
+    private float hideSpeed;
 
     private bool isOnGround;
     [SerializeField]private float groundRay = 1f;
@@ -15,22 +19,52 @@ public class PlayerController : Actor
     // Start is called before the first frame update
     void Start()
     {
+        Speed = 5f;
+        movementSpeed = Speed;
+        crouchSpeed = Speed / 3;
+        hideSpeed = Speed / 5;
         groundLayer = LayerMask.GetMask("Ground");
-        speed = 5f;
         rigidbody = GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        movementSpeed = HandleSpeed();
         Move();
         Jump();
         Hide();
-        if (hiding)
-            Debug.Log("hiding");
+        Crouch();
     }
 
     private void FixedUpdate()
+    {
+        DetectGround();
+    }
+    public override void Move()
+    {
+        float horizontal = Input.GetAxis("Horizontal");
+        //if(!isHiding)
+        transform.Translate(Vector3.left * -horizontal * Time.deltaTime * movementSpeed);
+    }
+
+    private void Jump()
+    {
+        if (Input.GetButtonDown("Jump") && isOnGround && !isHiding)
+            rigidbody.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+    }
+
+    private void Hide()
+    {
+        _ = Input.GetAxis("Vertical") > 0 ? isHiding = true : isHiding = false;
+    }
+
+    private void Crouch()
+    {
+        _ = Input.GetAxis("Vertical") < 0 ? isCrouching = true : isCrouching = false;
+    }
+
+    private void DetectGround()
     {
         //draws ray to ground
         Vector2 direction = Vector2.down;
@@ -39,21 +73,15 @@ public class PlayerController : Actor
 
         isOnGround = hit.collider != null;
     }
-    public override void Move()
-    {
-        float horizontal = Input.GetAxis("Horizontal");
-        if(!hiding)
-        transform.Translate(Vector3.left * -horizontal * Time.deltaTime * speed);
-    }
 
-    private void Jump()
+    private float HandleSpeed()
     {
-        if (Input.GetButtonDown("Jump") && isOnGround && !hiding)
-            rigidbody.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
-    }
-
-    private void Hide()
-    {
-        _ = Input.GetAxis("Vertical") > 0 ? hiding = true : hiding = false;
+        float result;
+        if (isHiding)
+            result = hideSpeed;
+        else if (isCrouching)
+            result = crouchSpeed;
+        else result = Speed;
+        return result;
     }
 }
