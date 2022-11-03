@@ -22,7 +22,7 @@ public class PlayerController : Actor
         Speed = 5f;
         movementSpeed = Speed;
         crouchSpeed = Speed / 3;
-        hideSpeed = Speed / 5;
+        hideSpeed = Speed / 6;
         groundLayer = LayerMask.GetMask("Ground");
         rigidbody = GetComponent<Rigidbody2D>();
     }
