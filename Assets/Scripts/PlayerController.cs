@@ -5,7 +5,9 @@ using UnityEngine;
 public class PlayerController : Actor
 {
     private new Rigidbody2D rigidbody;
+    private LightController light;
     [SerializeField]private float jumpForce = 10f;
+
     public bool isHiding = false;
     public bool isCrouching = false;
     private float crouchSpeed;
@@ -19,6 +21,9 @@ public class PlayerController : Actor
     // Start is called before the first frame update
     void Start()
     {
+        if(GameObject.Find("Player Light"))
+        light = GameObject.Find("Player Light").GetComponent<LightController>();
+
         Speed = 5f;
         movementSpeed = Speed;
         crouchSpeed = Speed / 3;
@@ -39,6 +44,8 @@ public class PlayerController : Actor
 
     private void FixedUpdate()
     {
+        if(light != null)
+        light.hiding = isHiding || isCrouching;
         DetectGround();
     }
     public override void Move()
