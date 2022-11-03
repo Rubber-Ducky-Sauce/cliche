@@ -366,7 +366,7 @@ GameObject:
   - component: {fileID: 849966407}
   - component: {fileID: 849966406}
   - component: {fileID: 849966405}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: ground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -477,7 +477,7 @@ GameObject:
   - component: {fileID: 1611187101}
   - component: {fileID: 1611187100}
   - component: {fileID: 1611187099}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: ground (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -588,8 +588,8 @@ GameObject:
   - component: {fileID: 2111337908}
   - component: {fileID: 2111337907}
   - component: {fileID: 2111337909}
-  - component: {fileID: 2111337911}
   - component: {fileID: 2111337910}
+  - component: {fileID: 2111337911}
   m_Layer: 0
   m_Name: Circle
   m_TagString: Untagged
@@ -677,6 +677,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   jumpForce: 5
+  isHiding: 0
+  isCrouching: 0
+  groundRay: 1
 --- !u!50 &2111337910
 Rigidbody2D:
   serializedVersion: 4
@@ -698,8 +701,8 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!58 &2111337911
-CircleCollider2D:
+--- !u!61 &2111337911
+BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -712,5 +715,15 @@ CircleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1, y: 1}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Size: {x: 1, y: 1}
+  m_EdgeRadius: 0

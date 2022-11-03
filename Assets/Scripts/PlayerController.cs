@@ -6,28 +6,82 @@ public class PlayerController : Actor
 {
     private new Rigidbody2D rigidbody;
     [SerializeField]private float jumpForce = 10f;
+    public bool isHiding = false;
+    public bool isCrouching = false;
+    private float crouchSpeed;
+    private float movementSpeed;
+    private float hideSpeed;
+
+    private bool isOnGround;
+    [SerializeField]private float groundRay = 1f;
+    private LayerMask groundLayer;
+
     // Start is called before the first frame update
     void Start()
     {
-        speed = 5f;
+        Speed = 5f;
+        movementSpeed = Speed;
+        crouchSpeed = Speed / 3;
+        hideSpeed = Speed / 6;
+        groundLayer = LayerMask.GetMask("Ground");
         rigidbody = GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        movementSpeed = HandleSpeed();
         Move();
         Jump();
+        Hide();
+        Crouch();
+    }
+
+    private void FixedUpdate()
+    {
+        DetectGround();
     }
     public override void Move()
     {
         float horizontal = Input.GetAxis("Horizontal");
-        transform.Translate(Vector3.left * -horizontal * Time.deltaTime * speed);
+        //if(!isHiding)
+        transform.Translate(Vector3.left * -horizontal * Time.deltaTime * movementSpeed);
     }
 
     private void Jump()
     {
-        if (Input.GetButtonDown("Jump"))
+        if (Input.GetButtonDown("Jump") && isOnGround && !isHiding)
             rigidbody.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+    }
+
+    private void Hide()
+    {
+        _ = Input.GetAxis("Vertical") > 0 ? isHiding = true : isHiding = false;
+    }
+
+    private void Crouch()
+    {
+        _ = Input.GetAxis("Vertical") < 0 ? isCrouching = true : isCrouching = false;
+    }
+
+    private void DetectGround()
+    {
+        //draws ray to ground
+        Vector2 direction = Vector2.down;
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, direction, groundRay, groundLayer);
+        Debug.DrawRay(transform.position, direction * groundRay, Color.yellow);
+
+        isOnGround = hit.collider != null;
+    }
+
+    private float HandleSpeed()
+    {
+        float result;
+        if (isHiding)
+            result = hideSpeed;
+        else if (isCrouching)
+            result = crouchSpeed;
+        else result = Speed;
+        return result;
     }
 }
