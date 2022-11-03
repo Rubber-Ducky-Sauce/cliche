@@ -6,9 +6,13 @@ public class PlayerController : Actor
 {
     private new Rigidbody2D rigidbody;
     [SerializeField]private float jumpForce = 10f;
+    private bool isOnGround;
+    [SerializeField]private float groundRay;
+    private LayerMask groundLayer;
     // Start is called before the first frame update
     void Start()
     {
+        groundLayer = LayerMask.GetMask("Ground");
         speed = 5f;
         rigidbody = GetComponent<Rigidbody2D>();
     }
@@ -19,6 +23,16 @@ public class PlayerController : Actor
         Move();
         Jump();
     }
+
+    private void FixedUpdate()
+    {
+        //draws ray to ground
+        Vector2 direction = Vector2.down;
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, direction, groundRay, groundLayer);
+        Debug.DrawRay(transform.position, direction * groundRay, Color.yellow);
+
+        isOnGround = hit.collider != null;
+    }
     public override void Move()
     {
         float horizontal = Input.GetAxis("Horizontal");
@@ -27,7 +41,7 @@ public class PlayerController : Actor
 
     private void Jump()
     {
-        if (Input.GetButtonDown("Jump"))
+        if (Input.GetButtonDown("Jump") && isOnGround)
             rigidbody.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
     }
 }
