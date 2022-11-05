@@ -18,6 +18,8 @@ public class PlayerController : Actor
     [SerializeField]private float groundRay = 1f;
     private LayerMask groundLayer;
 
+    public bool gameActive = true;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -35,11 +37,15 @@ public class PlayerController : Actor
     // Update is called once per frame
     void Update()
     {
-        movementSpeed = HandleSpeed();
-        Move();
-        Jump();
-        Hide();
-        Crouch();
+        if (gameActive)
+        {
+            movementSpeed = HandleSpeed();
+            Move();
+            Jump();
+            Hide();
+            Crouch();
+        }
+
     }
 
     private void FixedUpdate()

@@ -12,7 +12,8 @@ public class Enemy : Actor
     private LayerMask playerLayer;
 
     [SerializeField] float detectDistance = 5f;
-
+    private bool gameActive = true;
+    [SerializeField] GameObject alertMarker;
 
 
     // Start is called before the first frame update
@@ -26,8 +27,11 @@ public class Enemy : Actor
     // Update is called once per frame
     void Update()
     {
-        Move();
-        DetectPlayer();
+        if (gameActive)
+        {
+            Move();
+            DetectPlayer();
+        }
     }
     public override void Move()
     {
@@ -47,6 +51,7 @@ public class Enemy : Actor
 
         if (hit.collider == null || wallHit.collider != null)
         {
+            transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
             wallX = -wallX;
             rayX = -rayX;
             offSet = -offSet;
@@ -63,7 +68,14 @@ public class Enemy : Actor
         Debug.DrawRay(transform.position + new Vector3(offSet, 0, 0), direction, Color.red);
 
         if (hit.collider != null  && hit.collider.tag == "Player" && !IsPlayerHiding(hit.collider.gameObject))
+        {
             Debug.Log("Player Found! Straight to Jail!");
+            gameActive = false;
+            hit.collider.GetComponent<PlayerController>().gameActive = false;
+            alertMarker.SetActive(true);
+            StartCoroutine(GameManager.Instance.ReloadScene());
+        }
+           
 
     }
 
