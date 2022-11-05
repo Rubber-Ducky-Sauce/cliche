@@ -5,8 +5,8 @@ using UnityEngine;
 public class PlayerController : Actor
 {
     private new Rigidbody2D rigidbody;
-    private LightController light;
-    [SerializeField]private float jumpForce = 10f;
+    private new LightController light;
+    [SerializeField]private float jumpForce = 5f;
 
     public bool isHiding = false;
     public bool isCrouching = false;
