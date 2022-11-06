@@ -44,6 +44,7 @@ public class PlayerController : Actor
             Jump();
             Hide();
             Crouch();
+            TryLock();
         }
 
     }
@@ -96,5 +97,13 @@ public class PlayerController : Actor
             result = crouchSpeed;
         else result = Speed;
         return result;
+    }
+
+    public void TryLock()
+    {
+        if (Input.GetKeyDown(KeyCode.E) && GameManager.Instance.currentLock != null)
+        {
+            GameManager.Instance.currentLock.TryLock();
+        }
     }
 }

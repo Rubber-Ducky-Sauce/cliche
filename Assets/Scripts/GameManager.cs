@@ -8,7 +8,10 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance { get; private set; }
     [SerializeField] private float loadTime = 2f;
 
-    private string m_activeKey = null;
+    [SerializeField] private string m_activeKey = null;
+    [SerializeField] public Lock currentLock = null;
+    [SerializeField] string lockLocked;
+
     public string activeKey { get { return m_activeKey; } private set { m_activeKey = value; } }
     private void Awake()
     {
@@ -18,6 +21,15 @@ public class GameManager : MonoBehaviour
             return;
         }
         Instance = this;
+    }
+
+    private void Update()
+    {
+        if (currentLock != null)
+        {
+            lockLocked = currentLock ? "Locked" : "unlocked";
+        }
+        else lockLocked = "no lock";
     }
 
     public IEnumerator ReloadScene()

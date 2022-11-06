@@ -4,15 +4,40 @@ using UnityEngine;
 
 public class Lock : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] private bool locked = true;
+    [SerializeField] string keyName;
+
+    public void TryLock()
     {
-        
+        if (locked &&
+            GameManager.Instance.activeKey == keyName)
+        {
+            locked = false;
+            Debug.Log("door unlocked");
+        }
+        if (!locked)
+        {
+            Debug.Log("not locked...");
+        }
+        else Debug.Log("Need Specific Key");
     }
 
-    // Update is called once per frame
-    void Update()
+    public void OtherFunct()
     {
-        
+        if (!locked)
+        {
+            Debug.Log("okay, good");
+        }
     }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        GameManager.Instance.currentLock = this;
+    }
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        GameManager.Instance.currentLock = null;
+    }
+
+    
 }
