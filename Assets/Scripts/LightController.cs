@@ -16,7 +16,7 @@ public class LightController : MonoBehaviour
         player = GameObject.Find("Player");
         light = GetComponent<Light2D>();
         maxIntensity = light.intensity;
-        baseIntensity = .1f;
+        baseIntensity = .5f;
     }
 
     // Update is called once per frame

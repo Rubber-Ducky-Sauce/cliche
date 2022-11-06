@@ -5,8 +5,8 @@ using UnityEngine;
 public class PlayerController : Actor
 {
     private new Rigidbody2D rigidbody;
-    private LightController light;
-    [SerializeField]private float jumpForce = 10f;
+    private new LightController light;
+    [SerializeField]private float jumpForce = 5f;
 
     public bool isHiding = false;
     public bool isCrouching = false;
@@ -17,6 +17,8 @@ public class PlayerController : Actor
     private bool isOnGround;
     [SerializeField]private float groundRay = 1f;
     private LayerMask groundLayer;
+
+    public bool gameActive = true;
 
     // Start is called before the first frame update
     void Start()
@@ -35,11 +37,15 @@ public class PlayerController : Actor
     // Update is called once per frame
     void Update()
     {
-        movementSpeed = HandleSpeed();
-        Move();
-        Jump();
-        Hide();
-        Crouch();
+        if (gameActive)
+        {
+            movementSpeed = HandleSpeed();
+            Move();
+            Jump();
+            Hide();
+            Crouch();
+        }
+
     }
 
     private void FixedUpdate()
