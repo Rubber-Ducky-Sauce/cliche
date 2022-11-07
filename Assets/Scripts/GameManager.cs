@@ -12,6 +12,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] public Lock currentLock = null;
     [SerializeField] string lockLocked;
 
+    [SerializeField] public Interactable m_currentInteractable = null;
+    public Interactable currentInteractable { get { return m_currentInteractable; } set { m_currentInteractable = value; } }
     public string activeKey { get { return m_activeKey; } private set { m_activeKey = value; } }
     private void Awake()
     {
