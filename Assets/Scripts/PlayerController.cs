@@ -42,7 +42,7 @@ public class PlayerController : Actor
             movementSpeed = HandleSpeed();
             Move();
             Jump();
-            Hide();
+            Interact();
             Crouch();
             TryLock();
         }
@@ -58,7 +58,7 @@ public class PlayerController : Actor
     public override void Move()
     {
         float horizontal = Input.GetAxis("Horizontal");
-        //if(!isHiding)
+        if(!isHiding)
         transform.Translate(Vector3.left * -horizontal * Time.deltaTime * movementSpeed);
     }
 
@@ -68,9 +68,10 @@ public class PlayerController : Actor
             rigidbody.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
     }
 
-    private void Hide()
+    private void Interact()
     {
-        _ = Input.GetAxis("Vertical") > 0 ? isHiding = true : isHiding = false;
+        if (Input.GetKeyDown(KeyCode.E) && GameManager.Instance.currentInteractable != null)
+            GameManager.Instance.currentInteractable.Interact();
     }
 
     private void Crouch()
@@ -90,13 +91,7 @@ public class PlayerController : Actor
 
     private float HandleSpeed()
     {
-        float result;
-        if (isHiding)
-            result = hideSpeed;
-        else if (isCrouching)
-            result = crouchSpeed;
-        else result = Speed;
-        return result;
+        return isCrouching?crouchSpeed:Speed;
     }
 
     public void TryLock()

@@ -4,17 +4,24 @@ using UnityEngine;
 
 public class HidingPlace : Interactable
 {
-    public override void Interact()
+    PlayerController player;
+    private void Start()
     {
-        throw new System.NotImplementedException();
+        player = GameObject.Find("Player").GetComponent<PlayerController>();
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void Update()
     {
-        this.SetInteractable(this);
+        ExitHiding();
     }
-    private void OnTriggerExit2D(Collider2D collision)
+    public override void Interact()
     {
-        this.SetInteractable(null);
+        player.isHiding = true;
+    }
+
+    void ExitHiding()
+    {
+        if(player.isHiding && Mathf.Abs(Input.GetAxis("Horizontal")) > 0)
+            player.isHiding = false;
     }
 }
