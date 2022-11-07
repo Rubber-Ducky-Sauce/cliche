@@ -16,12 +16,13 @@ public class GameManager : MonoBehaviour
     public Interactable currentInteractable { 
         get { return m_currentInteractable; } 
         set { m_currentInteractable = value; } }
-    [SerializeField] public Interactable m_currentCollectable = null;
-    public Interactable currentCollectable
+    [SerializeField] public Collectable m_currentCollectable = null;
+    public Collectable currentCollectable
     {
         get { return m_currentCollectable; }
         set { m_currentCollectable = value; }
     }
+
     public string activeKey { get { return m_activeKey; } private set { m_activeKey = value; } }
     private void Awake()
     {
