@@ -24,7 +24,7 @@ public class LocksCanvas : MonoBehaviour
 
     void TryDoor()
     {
-        if(Input.GetKeyDown(KeyCode.E) && GameManager.Instance.currentLock != null)
+        if(Input.GetKeyDown(KeyCode.E) && GameManager.Instance.currentInteractable.GetType() == typeof(Lock) )
         {
            _=keyAcquired? InfoText.text = "Door Unlocked!!": InfoText.text = "requires key";
         }

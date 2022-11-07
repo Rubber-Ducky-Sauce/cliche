@@ -2,12 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Lock : MonoBehaviour
+public class Lock : Interactable
 {
     [SerializeField] private bool locked = true;
     [SerializeField] string keyName;
 
-    public void TryLock()
+    public override void Interact()
     {
         if (locked &&
             GameManager.Instance.activeKey == keyName)
@@ -30,14 +30,13 @@ public class Lock : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        GameManager.Instance.currentLock = this;
-    }
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        GameManager.Instance.currentLock = null;
-    }
+    //private void OnTriggerEnter2D(Collider2D collision)
+    //{
+    //    GameManager.Instance.currentLock = this;
+    //}
+    //private void OnTriggerExit2D(Collider2D collision)
+    //{
+    //    GameManager.Instance.currentLock = null;
+    //}
 
-    
 }

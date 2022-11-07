@@ -44,7 +44,7 @@ public class PlayerController : Actor
             Jump();
             Interact();
             Crouch();
-            TryLock();
+            //TryLock();
         }
 
     }
@@ -94,11 +94,11 @@ public class PlayerController : Actor
         return isCrouching?crouchSpeed:Speed;
     }
 
-    public void TryLock()
-    {
-        if (Input.GetKeyDown(KeyCode.E) && GameManager.Instance.currentLock != null)
-        {
-            GameManager.Instance.currentLock.TryLock();
-        }
-    }
+    //public void TryLock()
+    //{
+    //    if (Input.GetKeyDown(KeyCode.E) && GameManager.Instance.currentLock != null)
+    //    {
+    //        GameManager.Instance.currentLock.TryLock();
+    //    }
+    //}
 }
