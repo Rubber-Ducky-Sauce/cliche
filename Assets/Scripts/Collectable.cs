@@ -23,6 +23,5 @@ public abstract class Collectable : MonoBehaviour
         itemBoxItem.sprite = spriteRenderer.sprite;
         itemBoxItem.color = spriteRenderer.color;
         gameObject.SetActive(false);
-        
     }
 }

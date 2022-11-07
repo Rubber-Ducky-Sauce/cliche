@@ -14,6 +14,7 @@ public class Lock : Interactable
         {
             locked = false;
             Debug.Log("door unlocked");
+            GameManager.Instance.DepleteItem();
         }
         if (!locked)
         {

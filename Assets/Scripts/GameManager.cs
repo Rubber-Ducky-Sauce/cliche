@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -52,5 +53,16 @@ public class GameManager : MonoBehaviour
     public void SetKey(string keyName)
     {
         activeKey = keyName;
+    }
+
+    //function useItem
+        //if "oneUse" or depleted?
+            //remove from state and itemBox
+    public void DepleteItem()
+    {
+        Image itemBoxItem = GameObject.Find("Item").GetComponent<Image>();
+        itemBoxItem.sprite = null;
+        itemBoxItem.color = new Color(0,0,0,0);
+        currentCollectable = null;
     }
 }
