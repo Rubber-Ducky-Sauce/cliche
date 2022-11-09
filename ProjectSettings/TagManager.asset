@@ -14,7 +14,7 @@ TagManager:
   - Ground
   - Player
   - Enemy
-  - 
+  - Interactable
   - 
   - 
   - 
@@ -47,11 +47,11 @@ TagManager:
   - name: Other
     uniqueID: 1477497369
     locked: 0
-  - name: Player
-    uniqueID: 3298357659
-    locked: 0
   - name: HidingPlace
     uniqueID: 3790173903
+    locked: 0
+  - name: Player
+    uniqueID: 3298357659
     locked: 0
   - name: Enemy
     uniqueID: 1486415317

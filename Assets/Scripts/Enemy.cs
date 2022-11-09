@@ -10,6 +10,7 @@ public class Enemy : Actor
     private float offSet = .55f;
     private LayerMask groundLayer;
     private LayerMask playerLayer;
+    private LayerMask IgnoreMe;
 
     [SerializeField] float detectDistance = 5f;
     private bool gameActive = true;
@@ -22,6 +23,7 @@ public class Enemy : Actor
         Speed = 1f;
         groundLayer = LayerMask.GetMask("Ground");
         playerLayer = LayerMask.GetMask("Player");
+        IgnoreMe = LayerMask.GetMask("Interactable");
     }
 
     // Update is called once per frame
@@ -64,7 +66,7 @@ public class Enemy : Actor
     {
         //draws ray to ground
         Vector2 direction = new Vector2(detectDistance, 0);
-        RaycastHit2D hit = Physics2D.Raycast(transform.position + new Vector3(offSet,0,0), direction, Mathf.Abs(detectDistance));
+        RaycastHit2D hit = Physics2D.Raycast(transform.position + new Vector3(offSet,0,0), direction, Mathf.Abs(detectDistance), ~IgnoreMe);
         Debug.DrawRay(transform.position + new Vector3(offSet, 0, 0), direction, Color.red);
 
         if (hit.collider != null  && hit.collider.tag == "Player" && !IsPlayerHiding(hit.collider.gameObject))
