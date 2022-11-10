@@ -5,13 +5,13 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
-    path: Assets/Scenes/EnemyBehavior.unity
-    guid: 705001496f7ee2d4e95d73956fcf117a
-  - enabled: 0
-    path: Assets/Scenes/SampleScene.unity
-    guid: 8c9cfa26abfee488c85f1582747f6a02
   - enabled: 1
     path: Assets/Scenes/Interactables.unity
     guid: 4359ea17ac53203468e8475a62ac538f
+  - enabled: 0
+    path: Assets/Scenes/EnemyBehavior.unity
+    guid: 705001496f7ee2d4e95d73956fcf117a
+  - enabled: 1
+    path: Assets/Scenes/SampleScene.unity
+    guid: 8c9cfa26abfee488c85f1582747f6a02
   m_configObjects: {}

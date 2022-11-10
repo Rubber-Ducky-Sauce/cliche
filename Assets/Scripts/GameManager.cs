@@ -25,6 +25,7 @@ public class GameManager : MonoBehaviour
     }
 
     public string activeKey { get { return m_activeKey; } private set { m_activeKey = value; } }
+
     private void Awake()
     {
         if (Instance != null)
