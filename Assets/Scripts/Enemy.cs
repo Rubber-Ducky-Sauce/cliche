@@ -29,6 +29,7 @@ public class Enemy : Actor
     // Update is called once per frame
     void Update()
     {
+        GetIsGameActive();
         if (gameActive)
         {
             Move();
@@ -85,5 +86,10 @@ public class Enemy : Actor
     {
         PlayerController player = playerObject.GetComponent<PlayerController>();
         return player.isHiding;
+    }
+
+    private void GetIsGameActive()
+    {
+        gameActive = GameManager.Instance.gameIsActive;
     }
 }

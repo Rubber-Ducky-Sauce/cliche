@@ -18,7 +18,7 @@ public class PlayerController : Actor
     [SerializeField]private float groundRay = 1f;
     private LayerMask groundLayer;
 
-    public bool gameActive = true;
+    public bool gameActive;
 
     // Start is called before the first frame update
     void Start()
@@ -37,6 +37,7 @@ public class PlayerController : Actor
     // Update is called once per frame
     void Update()
     {
+        GetIsGameActive();
         if (gameActive)
         {
             movementSpeed = HandleSpeed();
@@ -94,11 +95,8 @@ public class PlayerController : Actor
         return isCrouching?crouchSpeed:Speed;
     }
 
-    //public void TryLock()
-    //{
-    //    if (Input.GetKeyDown(KeyCode.E) && GameManager.Instance.currentLock != null)
-    //    {
-    //        GameManager.Instance.currentLock.TryLock();
-    //    }
-    //}
+    private void GetIsGameActive()
+    {
+        gameActive = GameManager.Instance.gameIsActive;
+    }
 }

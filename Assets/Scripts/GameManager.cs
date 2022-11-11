@@ -17,11 +17,19 @@ public class GameManager : MonoBehaviour
     public Interactable currentInteractable { 
         get { return m_currentInteractable; } 
         set { m_currentInteractable = value; } }
+
     [SerializeField] public Collectable m_currentCollectable = null;
     public Collectable currentCollectable
     {
         get { return m_currentCollectable; }
         set { m_currentCollectable = value; }
+    }
+
+    [SerializeField] private bool m_gameIsActive = false;
+    public bool gameIsActive
+    {
+        get { return m_gameIsActive; }
+        private set { m_gameIsActive = value; }
     }
 
     public string activeKey { get { return m_activeKey; } private set { m_activeKey = value; } }
@@ -51,6 +59,11 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
+    public void LoadScene(string sceneName)
+    {
+        SceneManager.LoadScene(sceneName);
+    }
+
     public void SetKey(string keyName)
     {
         activeKey = keyName;
@@ -65,5 +78,10 @@ public class GameManager : MonoBehaviour
         itemBoxItem.sprite = null;
         itemBoxItem.color = new Color(0,0,0,0);
         currentCollectable = null;
+    }
+
+    public void SetGameActive(bool io)
+    {
+        gameIsActive = io;
     }
 }

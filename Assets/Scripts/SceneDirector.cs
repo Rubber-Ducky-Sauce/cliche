@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class SceneDirector : MonoBehaviour
 {
-    [SerializeField]bool readyToLoad = false;
+    [SerializeField] bool readyToLoad = false;
     [SerializeField] float loadTime = 2f;
     [SerializeField] string nextScene;
     //[SerializeField] List<string> actors;
@@ -34,6 +34,7 @@ public class SceneDirector : MonoBehaviour
 
     private void LoadNextScene()
     {
-        if (readyToLoad) SceneManager.LoadScene(nextScene);
+        Debug.Log("would load scene");
+        //if (readyToLoad) SceneManager.LoadScene(nextScene);
     }
 }

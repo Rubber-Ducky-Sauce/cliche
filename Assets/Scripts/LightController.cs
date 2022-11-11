@@ -20,9 +20,14 @@ public class LightController : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         light.intensity = hiding ? baseIntensity : maxIntensity;
+        FollowPlayer();
+    }
+
+    private void FollowPlayer()
+    {
         light.transform.position = new Vector3(player.transform.position.x,
         player.transform.position.y,
         transform.position.z);
