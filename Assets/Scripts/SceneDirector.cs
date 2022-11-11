@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Playables;
 
 public class SceneDirector : MonoBehaviour
 {
@@ -29,7 +30,7 @@ public class SceneDirector : MonoBehaviour
     //[SerializeField] private List<Dialog> ScriptDialog;
     private void Start()
     {
-        DeactivateGame();
+       
     }
     private void Update()
     {
@@ -37,11 +38,21 @@ public class SceneDirector : MonoBehaviour
         ReadyNextScene();
         ActivateGame();
     }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.tag == "Player")
+            PlayOnTrigger();
+    }
+
 
     private void ReadyNextScene()
     {
-        if (readyToLoad) 
+        if (readyToLoad)
+        {
+            readyToLoad = false; 
             StartCoroutine(LoadNextScene());
+        }
+            
     }
 
     IEnumerator LoadNextScene()
@@ -65,5 +76,13 @@ public class SceneDirector : MonoBehaviour
     private void DeactivateGame()
     {
       GameManager.Instance.SetIsGameActive(false);
+    }
+
+    public void PlayOnTrigger()
+    {
+        PlayableDirector director = GetComponent<PlayableDirector>();
+        sceneActive = true;
+        DeactivateGame();
+        director.Play();
     }
 }

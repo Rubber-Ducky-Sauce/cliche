@@ -13,7 +13,7 @@ public class Enemy : Actor
     private LayerMask IgnoreMe;
 
     [SerializeField] float detectDistance = 5f;
-    private bool gameActive = true;
+    [SerializeField] private bool gameActive;
     [SerializeField] GameObject alertMarker;
 
 
@@ -73,7 +73,7 @@ public class Enemy : Actor
         if (hit.collider != null  && hit.collider.tag == "Player" && !IsPlayerHiding(hit.collider.gameObject))
         {
             Debug.Log("Player Found! Straight to Jail!");
-            gameActive = false;
+            GameManager.Instance.SetIsGameActive(false);
             hit.collider.GetComponent<PlayerController>().gameActive = false;
             alertMarker.SetActive(true);
             StartCoroutine(GameManager.Instance.ReloadScene());
