@@ -18,7 +18,7 @@ public class CutSceneTrigger : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        director.PlayOnTrigger();
+        director.PlayScene();
     }
 
     private void SetDirector()
