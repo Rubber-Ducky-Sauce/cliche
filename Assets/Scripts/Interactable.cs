@@ -4,6 +4,8 @@ using UnityEngine;
 
 public abstract class Interactable : MonoBehaviour
 {
+    [SerializeField] protected bool isSceneTrigger;
+    public bool IOTrigger = false;
     public virtual void SetInteractable(Interactable interactable)
     {
         GameManager.Instance.currentInteractable = interactable;

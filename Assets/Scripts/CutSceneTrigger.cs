@@ -4,38 +4,30 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Playables;
 
-[RequireComponent(typeof(BoxCollider2D))]
-public class CutSceneTrigger : MonoBehaviour
+public  abstract class CutSceneTrigger : MonoBehaviour
 {
     [SerializeField] private string keyDirector;
-    [SerializeField] private SceneDirector director;
+    [SerializeField] protected SceneDirector director;
 
     private void Start()
     {
-        CheckisTrigger();
-        if(director == null)
         SetDirector();
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    protected virtual void SetDirector()
     {
-        director.PlayScene();
-    }
+        if(director == null)
+        {
+            if (keyDirector != "")
+                CheckKeyDirector();
+            if (director != null)
+                return;
+            else
+                AttachToFirstDirector();
+            if (director != null)
+                Debug.LogWarning($"trigger({gameObject.name}) attached to SceneDirector({director.gameObject.name})");
+        }
 
-    private void SetDirector()
-    {
-        if(keyDirector != "")
-        CheckKeyDirector();
-        if (director == null)
-        AttachToFirstDirector();
-        if(director != null)
-        Debug.LogWarning($"trigger({gameObject.name}) attached to SceneDirector({director.gameObject.name})");
-    }
-
-    private void CheckisTrigger()
-    {
-        BoxCollider2D collider = GetComponent<BoxCollider2D>();
-        if (!collider.isTrigger) collider.isTrigger = true;
     }
 
     private void CheckKeyDirector()

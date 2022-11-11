@@ -76,6 +76,7 @@ public class SceneDirector : MonoBehaviour
     {
         if (sceneStarted && !sceneActive)
         {
+            sceneStarted = false;
             GameManager.Instance.SetIsGameActive(true);
         }
     }

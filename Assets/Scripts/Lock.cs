@@ -7,6 +7,10 @@ public class Lock : Interactable
     [SerializeField] private bool locked = true;
     [SerializeField] string keyName;
 
+    private void Update()
+    {
+        
+    }
     public override void Interact()
     {
         if (locked &&
@@ -15,6 +19,7 @@ public class Lock : Interactable
             locked = false;
             Debug.Log("door unlocked");
             GameManager.Instance.DepleteItem();
+            if(isSceneTrigger) IOTrigger = !locked;
         }
         if (!locked)
         {
