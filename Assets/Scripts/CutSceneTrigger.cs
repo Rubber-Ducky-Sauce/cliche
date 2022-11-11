@@ -13,6 +13,7 @@ public class CutSceneTrigger : MonoBehaviour
     private void Start()
     {
         CheckisTrigger();
+        if(director == null)
         SetDirector();
     }
 
@@ -23,30 +24,36 @@ public class CutSceneTrigger : MonoBehaviour
 
     private void SetDirector()
     {
-        if (director == null && keyDirector != "")
-            director = GameObject.Find(keyDirector)?.GetComponent<SceneDirector>();
-
-        if (keyDirector != "" && director == null)
-        {
-            Debug.LogWarning($"No SceneDirector with name: {keyDirector}");
-
-            director = GameObject.FindObjectOfType<SceneDirector>();
-
-            switch (director)
-            {
-                case null:
-                    Debug.LogWarning($"No SceneDirector in hierarchy, Trigger({gameObject.name}) not set");
-                    break;
-                default:
-                    Debug.LogWarning($"trigger({gameObject.name}) attached to SceneDirector({director.gameObject.name})");
-                    break;
-            }
-        }
+        if(keyDirector != "")
+        CheckKeyDirector();
+        if (director == null)
+        AttachToFirstDirector();
+        if(director != null)
+        Debug.LogWarning($"trigger({gameObject.name}) attached to SceneDirector({director.gameObject.name})");
     }
 
     private void CheckisTrigger()
     {
         BoxCollider2D collider = GetComponent<BoxCollider2D>();
         if (!collider.isTrigger) collider.isTrigger = true;
+    }
+
+    private void CheckKeyDirector()
+    {
+        //attempt to set director with key
+        director = GameObject.Find(keyDirector)?.GetComponent<SceneDirector>();
+        //if key fails
+        if (director == null)
+            Debug.LogWarning($"No SceneDirector with name: {keyDirector}");
+        //or it worked!
+    }
+
+    private void AttachToFirstDirector()
+    {
+        //attempt to attach to first director in hierarchy
+        director = GameObject.FindObjectOfType<SceneDirector>();
+
+        if (director == null)
+            Debug.LogWarning($"No SceneDirector in hierarchy, Trigger({gameObject.name}) not set");
     }
 }

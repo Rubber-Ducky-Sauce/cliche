@@ -2055,6 +2055,7 @@ MonoBehaviour:
   loadTime: 30
   nextScene: Scenes/SampleScene
   isGameActive: 0
+  sceneStarted: 0
   sceneActive: 0
 --- !u!1 &1089791346
 GameObject:
@@ -2937,7 +2938,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1358523205
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2950,7 +2951,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 870f4b4716c4bce4a84ae9ecba3ffb0b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  keyDirector: 
+  keyDirector: efe
   director: {fileID: 0}
 --- !u!61 &1358523206
 BoxCollider2D:
