@@ -6,6 +6,7 @@ using UnityEngine;
 public class DialogDirector : MonoBehaviour
 {
     [SerializeField] Dialog dialog;
+    [SerializeField] Dialog.Line currentLine;
 
     private void Start()
     {
