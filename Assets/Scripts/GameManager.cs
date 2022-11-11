@@ -80,7 +80,7 @@ public class GameManager : MonoBehaviour
         currentCollectable = null;
     }
 
-    public void SetGameActive(bool io)
+    public void SetIsGameActive(bool io)
     {
         gameIsActive = io;
     }
