@@ -8,7 +8,6 @@ using UnityEngine.Playables;
 public class SceneDirector : MonoBehaviour
 {
     [SerializeField] bool readyToLoad = false;
-    [SerializeField] float loadTime = 2f;
     [SerializeField] string nextScene;
     [SerializeField] private bool isGameActive;
     [SerializeField] bool sceneStarted = false;
@@ -56,15 +55,9 @@ public class SceneDirector : MonoBehaviour
         if (readyToLoad)
         {
             readyToLoad = false; 
-            StartCoroutine(LoadNextScene());
+            GameManager.Instance.LoadScene(nextScene);
         }
             
-    }
-
-    IEnumerator LoadNextScene()
-    {
-        yield return new WaitForSeconds(loadTime);
-        GameManager.Instance.LoadScene(nextScene);
     }
 
     private void GetIsGameActive()

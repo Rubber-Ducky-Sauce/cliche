@@ -76,7 +76,7 @@ public class Enemy : Actor
             GameManager.Instance.SetIsGameActive(false);
             hit.collider.GetComponent<PlayerController>().gameActive = false;
             alertMarker.SetActive(true);
-            StartCoroutine(GameManager.Instance.ReloadScene());
+            StartCoroutine(GameManager.Instance.ReloadScene(2f));
         }
            
 

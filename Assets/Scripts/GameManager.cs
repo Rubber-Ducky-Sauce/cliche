@@ -7,7 +7,6 @@ using UnityEngine.UI;
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
-    [SerializeField] private float loadTime = 2f;
 
     [SerializeField] private string m_activeKey = null;
     [SerializeField] public Lock currentLock = null;
@@ -53,7 +52,7 @@ public class GameManager : MonoBehaviour
         else lockLocked = "no lock";
     }
 
-    public IEnumerator ReloadScene()
+    public IEnumerator ReloadScene(float loadTime)
     {
         yield return new WaitForSeconds(loadTime);
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
