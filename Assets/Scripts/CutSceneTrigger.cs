@@ -12,8 +12,19 @@ public class CutSceneTrigger : MonoBehaviour
 
     private void Start()
     {
-        if(director == null && keyDirector != "")
-        director = GameObject.Find(keyDirector)?.GetComponent<SceneDirector>();
+        CheckisTrigger();
+        SetDirector();
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        director.PlayOnTrigger();
+    }
+
+    private void SetDirector()
+    {
+        if (director == null && keyDirector != "")
+            director = GameObject.Find(keyDirector)?.GetComponent<SceneDirector>();
 
         if (keyDirector != "" && director == null)
         {
@@ -31,11 +42,11 @@ public class CutSceneTrigger : MonoBehaviour
                     break;
             }
         }
-
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void CheckisTrigger()
     {
-        director.PlayOnTrigger();
+        BoxCollider2D collider = GetComponent<BoxCollider2D>();
+        if (!collider.isTrigger) collider.isTrigger = true;
     }
 }
