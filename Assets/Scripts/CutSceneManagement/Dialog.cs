@@ -7,12 +7,15 @@ public class Dialog : ScriptableObject
 {
     [SerializeField]
     public List<string> actors;
+
+    [SerializeField]public List<Line> ScriptDialog;
+
     [Serializable]
     public struct Line
     {
-        [SerializeField][Range(0,6)]public int actor;
+        [SerializeField][Range(0, 10)] public int actor;
         public string line;
-        
+
 
         public Line(int actor, string line)
         {
@@ -20,8 +23,6 @@ public class Dialog : ScriptableObject
             this.line = line;
         }
     }
-
-    [SerializeField]public List<Line> ScriptDialog;
 
 }
 
