@@ -6,10 +6,12 @@ using UnityEngine;
 public class HearPlayer : MonoBehaviour
 {
     PlayerController player;
+    Enemy enemy;
     [SerializeField] float hearingDistance;
 
     private void Start()
     {
+        enemy = GetComponent<Enemy>();
         player = GameObject.Find("Player").GetComponent<PlayerController>();
     }
 
@@ -17,7 +19,7 @@ public class HearPlayer : MonoBehaviour
     {
         if((player.transform.position - transform.position).magnitude <= hearingDistance && player.isMoving && !player.isCrouching)
         {
-            Debug.Log("I hear something...");
+            enemy.BecomeAlert();
         }
     }
 

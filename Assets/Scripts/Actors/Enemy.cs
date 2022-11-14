@@ -25,6 +25,7 @@ public class Enemy : Actor
     [SerializeField] public bool usingMovementDistance = false;
     [SerializeField] float startPos;
     [SerializeField][Range(0,10)] public float movementDist;
+    [SerializeField] bool alert = false;
 
 
     // Start is called before the first frame update
@@ -51,9 +52,11 @@ public class Enemy : Actor
     }
     public override void Move()
     {
-        if(!posted)
         DetectEdge();
-        transform.Translate(Vector3.right * Time.deltaTime * Speed);
+        if (!posted) {
+            transform.Translate(Speed * Time.deltaTime * Vector3.right);
+        }
+
     }
 
     private void DetectEdge()
@@ -107,18 +110,18 @@ public class Enemy : Actor
     public IEnumerator TurnAround(float postTime)
     {
         posted = true;
-        float normalSpeed = Speed;
-        Speed = 0;
+        wallX = -wallX;
+        rayX = -rayX;
+        Speed = -Speed;
         yield return new WaitForSeconds(postTime);
         if (!playerFound)
         {
-            transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
-            wallX = -wallX;
-            rayX = -rayX;
-            offSet = -offSet;
-            detectDistance = -detectDistance;
-            Speed = -normalSpeed;
             posted = false;
+
+
+            offSet = -offSet;
+            transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
+            detectDistance = -detectDistance;
         }
     }
     public void InitDirection()
@@ -146,5 +149,29 @@ public class Enemy : Actor
         {
             transform.position = new Vector3(transform.position.x > startPos ? startPos + movementDist : startPos - movementDist, transform.position.y, transform.position.z);
         }
+    }
+
+    public void BecomeAlert()
+    {
+        if (!alert)
+        {
+
+            alert = true;
+            Speed = Speed * 2f;
+            Debug.Log(Speed);
+            postTime = postTime / 2f;
+            alertMarker.SetActive(true);
+            StartCoroutine(CalmDown());
+        }
+
+    }
+    IEnumerator CalmDown()
+    {
+        yield return new WaitForSeconds(5);
+        alert = false;
+        Speed = Speed / 2f;
+
+        postTime = postTime * 2f;
+        alertMarker.SetActive(false);
     }
 }
