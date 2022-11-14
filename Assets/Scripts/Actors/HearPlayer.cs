@@ -7,7 +7,7 @@ public class HearPlayer : MonoBehaviour
 {
     PlayerController player;
     Enemy enemy;
-    [SerializeField] float hearingDistance;
+    public float hearingDistance;
 
     private void Start()
     {
@@ -23,9 +23,5 @@ public class HearPlayer : MonoBehaviour
         }
     }
 
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = new Color(Color.yellow.r, Color.yellow.g, Color.yellow.b, .3f);
-        Gizmos.DrawSphere(this.transform.position, hearingDistance);
-    }
+
 }

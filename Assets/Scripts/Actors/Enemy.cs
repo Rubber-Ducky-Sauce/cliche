@@ -7,7 +7,7 @@ public class Enemy : Actor
     private float rayLength = .75f;
     private float rayX = 1;
     private float wallX = .7f;
-    private float offSet = .55f;
+    public float offSet = .55f;
     private LayerMask groundLayer;
     private LayerMask playerLayer;
     private LayerMask IgnoreMe;
@@ -15,7 +15,7 @@ public class Enemy : Actor
     bool playerFound;
 
     [SerializeField] private float speed = 1f;
-    [SerializeField] float detectDistance = 5f;
+    public float detectDistance = 5f;
     [SerializeField] float postTime;
     [SerializeField] float wallPostTime;
     [SerializeField] bool posted = false;
@@ -81,7 +81,6 @@ public class Enemy : Actor
         //draws ray to ground
         Vector2 direction = new Vector2(detectDistance, 0);
         RaycastHit2D hit = Physics2D.Raycast(transform.position + new Vector3(offSet,0,0), direction, Mathf.Abs(detectDistance), ~IgnoreMe);
-        Debug.DrawRay(transform.position + new Vector3(offSet, 0, 0), direction, Color.red);
 
         if (hit.collider != null  && hit.collider.tag == "Player" && !IsPlayerHiding(hit.collider.gameObject))
         {
