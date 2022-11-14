@@ -22,11 +22,15 @@ public class Enemy : Actor
     [SerializeField] private bool gameActive;
     [SerializeField] GameObject alertMarker;
     [SerializeField] bool facingRight;
+    [SerializeField] bool usingMovementDistance = false;
+    [SerializeField] float startPos;
+    [SerializeField] float movementDist;
 
 
     // Start is called before the first frame update
     void Start()
     {
+        startPos = transform.position.x;
         facingRight = transform.localScale.x < 0;
         Speed = speed;
         InitDirection();
@@ -38,6 +42,8 @@ public class Enemy : Actor
     // Update is called once per frame
     void Update()
     {
+        if (usingMovementDistance)
+            ShowMovementDistance();
         GetIsGameActive();
         if (gameActive)
         {
@@ -62,9 +68,10 @@ public class Enemy : Actor
         RaycastHit2D wallHit = Physics2D.Raycast(transform.position, wallDir, wallX, groundLayer);
         Debug.DrawRay(transform.position - new Vector3(0, .1f, 0), wallDir * wallX, Color.green);
 
-        if (hit.collider == null || wallHit.collider != null)
+        if (hit.collider == null || wallHit.collider != null || ReachedMaxDistance())
         {
-            StartCoroutine(TurnAround(wallHit.collider !=null? wallPostTime: postTime));
+            ResetMaxDistX();
+            StartCoroutine(TurnAround(wallHit.collider != null ? wallPostTime: postTime));
         }
     }
 
@@ -87,6 +94,17 @@ public class Enemy : Actor
            
 
     }
+
+    private void ShowMovementDistance()
+    {
+        Vector2 direction = new Vector2(movementDist, 0);
+        if (usingMovementDistance)
+        {
+            Debug.DrawRay(transform.position + new Vector3(0, -.33f, 0), direction - new Vector2(transform.position.x,0), Color.gray);
+            Debug.DrawRay(transform.position + new Vector3(0, -.33f, 0), -direction - new Vector2(transform.position.x, 0), Color.gray);
+        }
+    }
+            
 
     private bool IsPlayerHiding(GameObject playerObject)
     {
@@ -128,5 +146,20 @@ public class Enemy : Actor
             Speed = -Speed;
         }
         Debug.Log(Speed);
+    }
+
+    private bool ReachedMaxDistance()
+    {
+        if(usingMovementDistance)
+        return (Mathf.Abs(startPos - transform.position.x) > movementDist);
+        return false;
+    }
+
+    private void ResetMaxDistX()
+    {
+        if (usingMovementDistance && ReachedMaxDistance())
+        {
+            transform.position = new Vector3(transform.position.x > startPos ? startPos + movementDist : startPos - movementDist, transform.position.y, transform.position.z);
+        }
     }
 }
