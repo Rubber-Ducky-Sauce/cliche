@@ -15,12 +15,15 @@ public class Enemy : Actor
     [SerializeField] float detectDistance = 5f;
     [SerializeField] private bool gameActive;
     [SerializeField] GameObject alertMarker;
+    [SerializeField] bool facingRight;
 
 
     // Start is called before the first frame update
     void Start()
     {
+        facingRight = transform.localScale.x < 0;
         Speed = 1f;
+        InitDirection();
         groundLayer = LayerMask.GetMask("Ground");
         playerLayer = LayerMask.GetMask("Player");
         IgnoreMe = LayerMask.GetMask("Interactable");
@@ -54,12 +57,7 @@ public class Enemy : Actor
 
         if (hit.collider == null || wallHit.collider != null)
         {
-            transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
-            wallX = -wallX;
-            rayX = -rayX;
-            offSet = -offSet;
-            detectDistance = -detectDistance;
-            Speed = -Speed;
+            TurnAround();
         }
     }
 
@@ -91,5 +89,28 @@ public class Enemy : Actor
     private void GetIsGameActive()
     {
         gameActive = GameManager.Instance.gameIsActive;
+    }
+
+    public void TurnAround()
+    {
+        transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
+        wallX = -wallX;
+        rayX = -rayX;
+        offSet = -offSet;
+        detectDistance = -detectDistance;
+        Speed = -Speed;
+    }
+    public void InitDirection()
+    {
+        Debug.Log(Speed);
+        if (!facingRight)
+        {
+            wallX = -wallX;
+            rayX = -rayX;
+            offSet = -offSet;
+            detectDistance = -detectDistance;
+            Speed = -Speed;
+        }
+        Debug.Log(Speed);
     }
 }
