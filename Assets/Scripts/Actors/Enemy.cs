@@ -12,6 +12,8 @@ public class Enemy : Actor
     private LayerMask playerLayer;
     private LayerMask IgnoreMe;
 
+    bool playerFound;
+
     [SerializeField] private float speed = 1f;
     [SerializeField] float detectDistance = 5f;
     [SerializeField] float postTime;
@@ -75,6 +77,7 @@ public class Enemy : Actor
 
         if (hit.collider != null  && hit.collider.tag == "Player" && !IsPlayerHiding(hit.collider.gameObject))
         {
+            playerFound = true;
             Debug.Log("Player Found! Straight to Jail!");
             GameManager.Instance.SetIsGameActive(false);
             hit.collider.GetComponent<PlayerController>().gameActive = false;
@@ -102,13 +105,16 @@ public class Enemy : Actor
         float normalSpeed = Speed;
         Speed = 0;
         yield return new WaitForSeconds(postTime);
-        transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
-        wallX = -wallX;
-        rayX = -rayX;
-        offSet = -offSet;
-        detectDistance = -detectDistance;
-        Speed = -normalSpeed;
-        posted = false;
+        if (!playerFound)
+        {
+            transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
+            wallX = -wallX;
+            rayX = -rayX;
+            offSet = -offSet;
+            detectDistance = -detectDistance;
+            Speed = -normalSpeed;
+            posted = false;
+        }
     }
     public void InitDirection()
     {
