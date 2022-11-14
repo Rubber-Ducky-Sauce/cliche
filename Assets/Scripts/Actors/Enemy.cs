@@ -22,9 +22,9 @@ public class Enemy : Actor
     [SerializeField] private bool gameActive;
     [SerializeField] GameObject alertMarker;
     [SerializeField] bool facingRight;
-    [SerializeField] bool usingMovementDistance = false;
+    [SerializeField] public bool usingMovementDistance = false;
     [SerializeField] float startPos;
-    [SerializeField] float movementDist;
+    [SerializeField][Range(0,10)] public float movementDist;
 
 
     // Start is called before the first frame update
@@ -42,8 +42,6 @@ public class Enemy : Actor
     // Update is called once per frame
     void Update()
     {
-        if (usingMovementDistance)
-            ShowMovementDistance();
         GetIsGameActive();
         if (gameActive)
         {
@@ -93,18 +91,7 @@ public class Enemy : Actor
         }
            
 
-    }
-
-    private void ShowMovementDistance()
-    {
-        Vector2 direction = new Vector2(movementDist, 0);
-        if (usingMovementDistance)
-        {
-            Debug.DrawRay(transform.position + new Vector3(0, -.33f, 0), direction - new Vector2(transform.position.x,0), Color.gray);
-            Debug.DrawRay(transform.position + new Vector3(0, -.33f, 0), -direction - new Vector2(transform.position.x, 0), Color.gray);
-        }
-    }
-            
+    }  
 
     private bool IsPlayerHiding(GameObject playerObject)
     {
