@@ -123,7 +123,6 @@ public class Enemy : Actor
     }
     public void InitDirection()
     {
-        Debug.Log(Speed);
         if (!facingRight)
         {
             wallX = -wallX;
@@ -132,7 +131,6 @@ public class Enemy : Actor
             detectDistance = -detectDistance;
             Speed = -Speed;
         }
-        Debug.Log(Speed);
     }
 
     private bool ReachedMaxDistance()

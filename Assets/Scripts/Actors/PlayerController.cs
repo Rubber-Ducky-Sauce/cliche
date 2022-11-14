@@ -12,9 +12,9 @@ public class PlayerController : Actor
     public bool isCrouching = false;
     private float crouchSpeed;
     private float movementSpeed;
-    private float hideSpeed;
 
     private bool isOnGround;
+    public bool isMoving;
     [SerializeField]private float groundRay = 1f;
     private LayerMask groundLayer;
 
@@ -29,7 +29,6 @@ public class PlayerController : Actor
         Speed = 5f;
         movementSpeed = Speed;
         crouchSpeed = Speed / 3;
-        hideSpeed = Speed / 6;
         groundLayer = LayerMask.GetMask("Ground");
         rigidbody = GetComponent<Rigidbody2D>();
     }
@@ -60,7 +59,10 @@ public class PlayerController : Actor
     {
         float horizontal = Input.GetAxis("Horizontal");
         if(!isHiding)
-        transform.Translate(Vector3.left * -horizontal * Time.deltaTime * movementSpeed);
+        transform.Translate(Vector3.right * horizontal * Time.deltaTime * movementSpeed);
+
+
+        isMoving = isOnGround && horizontal != 0;
     }
 
     private void Jump()
