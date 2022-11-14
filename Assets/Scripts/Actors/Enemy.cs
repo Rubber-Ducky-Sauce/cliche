@@ -12,6 +12,7 @@ public class Enemy : Actor
     private LayerMask playerLayer;
     private LayerMask IgnoreMe;
 
+    [SerializeField] private float speed = 1f;
     [SerializeField] float detectDistance = 5f;
     [SerializeField] private bool gameActive;
     [SerializeField] GameObject alertMarker;
@@ -22,7 +23,7 @@ public class Enemy : Actor
     void Start()
     {
         facingRight = transform.localScale.x < 0;
-        Speed = 1f;
+        Speed = speed;
         InitDirection();
         groundLayer = LayerMask.GetMask("Ground");
         playerLayer = LayerMask.GetMask("Player");
