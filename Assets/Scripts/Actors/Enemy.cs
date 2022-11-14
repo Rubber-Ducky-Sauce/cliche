@@ -14,6 +14,9 @@ public class Enemy : Actor
 
     [SerializeField] private float speed = 1f;
     [SerializeField] float detectDistance = 5f;
+    [SerializeField] float postTime;
+    [SerializeField] float wallPostTime;
+    [SerializeField] bool posted = false;
     [SerializeField] private bool gameActive;
     [SerializeField] GameObject alertMarker;
     [SerializeField] bool facingRight;
@@ -42,6 +45,7 @@ public class Enemy : Actor
     }
     public override void Move()
     {
+        if(!posted)
         DetectEdge();
         transform.Translate(Vector3.right * Time.deltaTime * Speed);
     }
@@ -58,7 +62,7 @@ public class Enemy : Actor
 
         if (hit.collider == null || wallHit.collider != null)
         {
-            TurnAround();
+            StartCoroutine(TurnAround(wallHit.collider !=null? wallPostTime: postTime));
         }
     }
 
@@ -92,14 +96,19 @@ public class Enemy : Actor
         gameActive = GameManager.Instance.gameIsActive;
     }
 
-    public void TurnAround()
+    public IEnumerator TurnAround(float postTime)
     {
+        posted = true;
+        float normalSpeed = Speed;
+        Speed = 0;
+        yield return new WaitForSeconds(postTime);
         transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
         wallX = -wallX;
         rayX = -rayX;
         offSet = -offSet;
         detectDistance = -detectDistance;
-        Speed = -Speed;
+        Speed = -normalSpeed;
+        posted = false;
     }
     public void InitDirection()
     {
