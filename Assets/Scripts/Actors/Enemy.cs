@@ -25,7 +25,7 @@ public class Enemy : Actor
     [SerializeField] public bool usingMovementDistance = false;
     [SerializeField] float startPos;
     [SerializeField][Range(0,10)] public float movementDist;
-    [SerializeField] bool alert = false;
+    [SerializeField]public bool alert = false;
 
 
     // Start is called before the first frame update
