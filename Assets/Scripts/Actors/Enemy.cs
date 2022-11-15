@@ -32,7 +32,7 @@ public class Enemy : Actor
     // Start is called before the first frame update
     void Start()
     {
-        alertMarker = transform.Find("AlertMarker").gameObject;
+        alertMarker = transform.Find("AlertMarker")?.gameObject;
         startPos = transform.position.x;
         facingRight = transform.localScale.x < 0;
         Speed = speed;
@@ -159,7 +159,6 @@ public class Enemy : Actor
 
             alert = true;
             Speed = Speed * 2f;
-            Debug.Log(Speed);
             postTime = postTime / 2f;
             alertMarker.SetActive(true);
             StartCoroutine(CalmDown());
