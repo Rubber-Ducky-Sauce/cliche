@@ -308,9 +308,9 @@ MonoBehaviour:
   gameActive: 0
   alertMarker: {fileID: 2857716773944850731}
   facingRight: 0
-  usingMovementDistance: 0
+  usingMovementDistance: 1
   startPos: 0
-  movementDist: 0
+  movementDist: 2
   alert: 0
   isActive: 1
 --- !u!50 &5277784329624517419
