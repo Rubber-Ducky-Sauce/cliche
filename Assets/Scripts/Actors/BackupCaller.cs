@@ -22,6 +22,8 @@ public class BackupCaller : MonoBehaviour
     [SerializeField] float offset = 2f;
     [SerializeField] bool backupSpawned = false;
     [SerializeField] float despawnTime = 5f;
+    [SerializeField] float readyTime = 1f;
+
     private void Start()
     {
         player = FindObjectOfType<PlayerController>();
@@ -41,10 +43,19 @@ public class BackupCaller : MonoBehaviour
         backupSpawned = true;
         Vector3 SpawnPointOffset = player.transform.position.x < transform.position.x ? new Vector3(offset, 0, 0): new Vector3(-offset, 0, 0);
         if (spawnedEnemy == null)
+        {
             spawnedEnemy = Instantiate(enemy, transform.position + SpawnPointOffset, enemy.transform.rotation);
-        else
-            spawnedEnemy.gameObject.SetActive(true);
+            spawnedEnemy.isActive = false;
+        }
 
+        else
+        {
+            spawnedEnemy.gameObject.SetActive(true);
+            spawnedEnemy.isActive = false;
+            spawnedEnemy.transform.position = transform.position + SpawnPointOffset;
+        }
+        StartCoroutine(ReadyEnemy());
+        StartCoroutine(UnReadyEnemy());
         StartCoroutine(PrepareDespawn());
     }
 
@@ -58,5 +69,17 @@ public class BackupCaller : MonoBehaviour
     {
         yield return new WaitForSeconds(despawnTime);
         DespawnBackup();
+    }
+
+    IEnumerator ReadyEnemy()
+    {
+        yield return new WaitForSeconds(readyTime);
+        spawnedEnemy.isActive = true;
+    }
+
+    IEnumerator UnReadyEnemy()
+    {
+        yield return new WaitForSeconds(despawnTime - 1f);
+        spawnedEnemy.isActive = false;
     }
 }

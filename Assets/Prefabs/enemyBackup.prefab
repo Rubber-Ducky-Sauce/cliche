@@ -95,7 +95,7 @@ GameObject:
   - component: {fileID: 6348967080274781614}
   - component: {fileID: 3789035396410379526}
   m_Layer: 8
-  m_Name: Triangle
+  m_Name: AlertMarker
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -302,8 +302,8 @@ MonoBehaviour:
   offSet: 0.55
   speed: 1
   detectDistance: 5
-  postTime: 0
-  wallPostTime: 0
+  postTime: 0.5
+  wallPostTime: 0.25
   posted: 0
   gameActive: 0
   alertMarker: {fileID: 2857716773944850731}
@@ -312,6 +312,7 @@ MonoBehaviour:
   startPos: 0
   movementDist: 0
   alert: 0
+  isActive: 1
 --- !u!50 &5277784329624517419
 Rigidbody2D:
   serializedVersion: 4
@@ -371,8 +372,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   backupEnemy: {fileID: 0}
+  spawnedEnemy: {fileID: 0}
   offset: 2
   backupSpawned: 0
+  despawnTime: 5
+  readyTime: 1
 --- !u!1 &8637931852822028080
 GameObject:
   m_ObjectHideFlags: 0
