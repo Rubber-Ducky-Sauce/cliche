@@ -44,6 +44,7 @@ public class PlayerController : Actor
             Jump();
             Interact();
             Crouch();
+            UseItem();
             //TryLock();
         }
 
@@ -100,5 +101,11 @@ public class PlayerController : Actor
     private void GetIsGameActive()
     {
         gameActive = GameManager.Instance.gameIsActive;
+    }
+
+    private void UseItem()
+    {
+        if (Input.GetKeyDown(KeyCode.L))
+            GameManager.Instance.UseCurrentItem();
     }
 }

@@ -10,7 +10,6 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private string m_activeKey = null;
     [SerializeField] public Lock currentLock = null;
-    [SerializeField] string lockLocked;
 
     [SerializeField] public Interactable m_currentInteractable = null;
     public Interactable currentInteractable { 
@@ -43,15 +42,6 @@ public class GameManager : MonoBehaviour
         Instance = this;
     }
 
-    private void Update()
-    {
-        if (currentLock != null)
-        {
-            lockLocked = currentLock ? "Locked" : "unlocked";
-        }
-        else lockLocked = "no lock";
-    }
-
     public IEnumerator ReloadScene(float loadTime)
     {
         yield return new WaitForSeconds(loadTime);
@@ -82,5 +72,13 @@ public class GameManager : MonoBehaviour
     public void SetIsGameActive(bool io)
     {
         gameIsActive = io;
+    }
+
+    public void UseCurrentItem()
+    {
+        if (currentCollectable != null)
+            currentCollectable.Use();
+        else
+            Debug.Log("no usable item");
     }
 }

@@ -24,4 +24,9 @@ public abstract class Collectable : MonoBehaviour
         itemBoxItem.color = spriteRenderer.color;
         gameObject.SetActive(false);
     }
+
+    public virtual void Use()
+    {
+        GameManager.Instance.DepleteItem();
+    }
 }
