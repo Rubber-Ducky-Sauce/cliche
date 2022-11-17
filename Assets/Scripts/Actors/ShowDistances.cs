@@ -7,6 +7,7 @@ public class ShowDistances : MonoBehaviour
 {
     Enemy enemy;
     HearPlayer enemyHearing;
+
     private void Start()
     {
         enemy = GetComponent<Enemy>();
@@ -14,6 +15,7 @@ public class ShowDistances : MonoBehaviour
     }
     void Update()
     {
+
         if(enemy.usingMovementDistance)
         DrawMovementDistance();
         DrawVisualDistance();
@@ -24,8 +26,8 @@ public class ShowDistances : MonoBehaviour
         Vector2 direction = new Vector2(enemy.movementDist, 0);
         if (enemy.usingMovementDistance)
         {
-            Debug.DrawRay(transform.position + new Vector3(0, -.33f, 0), direction - new Vector2(transform.position.x, 0), Color.gray);
-            Debug.DrawRay(transform.position + new Vector3(0, -.33f, 0), -direction - new Vector2(transform.position.x, 0), Color.gray);
+            Debug.DrawRay(transform.position + new Vector3(0, -.33f, 0), direction, Color.gray);
+            Debug.DrawRay(transform.position + new Vector3(0, -.33f, 0), -direction, Color.gray);
         }
     }
 

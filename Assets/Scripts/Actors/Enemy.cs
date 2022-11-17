@@ -25,12 +25,14 @@ public class Enemy : Actor
     [SerializeField] public bool usingMovementDistance = false;
     [SerializeField] float startPos;
     [SerializeField][Range(0,10)] public float movementDist;
-    [SerializeField] bool alert = false;
+    [SerializeField]public bool alert = false;
+    public bool isActive = true;
 
 
     // Start is called before the first frame update
     void Start()
     {
+        alertMarker = transform.Find("AlertMarker")?.gameObject;
         startPos = transform.position.x;
         facingRight = transform.localScale.x < 0;
         Speed = speed;
@@ -44,7 +46,7 @@ public class Enemy : Actor
     void Update()
     {
         GetIsGameActive();
-        if (gameActive)
+        if (gameActive && isActive)
         {
             Move();
             DetectPlayer();
@@ -157,7 +159,6 @@ public class Enemy : Actor
 
             alert = true;
             Speed = Speed * 2f;
-            Debug.Log(Speed);
             postTime = postTime / 2f;
             alertMarker.SetActive(true);
             StartCoroutine(CalmDown());
