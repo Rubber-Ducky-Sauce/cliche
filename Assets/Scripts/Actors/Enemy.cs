@@ -28,6 +28,8 @@ public class Enemy : Actor
     [SerializeField]public bool alert = false;
     public bool isActive = true;
 
+    public bool distracted = false;
+
 
     // Start is called before the first frame update
     void Start()
@@ -46,7 +48,7 @@ public class Enemy : Actor
     void Update()
     {
         GetIsGameActive();
-        if (gameActive && isActive)
+        if (gameActive && isActive  && !distracted)
         {
             Move();
             DetectPlayer();
@@ -165,6 +167,7 @@ public class Enemy : Actor
         }
 
     }
+
     IEnumerator CalmDown()
     {
         yield return new WaitForSeconds(5);
@@ -173,5 +176,17 @@ public class Enemy : Actor
 
         postTime = postTime * 2f;
         alertMarker.SetActive(false);
+    }
+
+    private IEnumerator BeingDistracted(float distractionTime)
+    {
+        distracted = true;
+        yield return new WaitForSeconds(distractionTime);
+        distracted = false;
+    }
+
+    public void BecomeDistracted(float distractionTime)
+    {
+        StartCoroutine(BeingDistracted(distractionTime));
     }
 }

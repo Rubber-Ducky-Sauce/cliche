@@ -13,6 +13,7 @@ public class PlayerController : Actor
     private float crouchSpeed;
     private float movementSpeed;
 
+    public bool isFacingLeft;
     private bool isOnGround;
     public bool isMoving;
     [SerializeField]private float groundRay = 1f;
@@ -62,6 +63,10 @@ public class PlayerController : Actor
         if(!isHiding)
         transform.Translate(Vector3.right * horizontal * Time.deltaTime * movementSpeed);
 
+        if (horizontal > 0)
+            isFacingLeft = false;
+        if (horizontal < 0)
+            isFacingLeft = true;
 
         isMoving = isOnGround && horizontal != 0;
     }
@@ -105,7 +110,7 @@ public class PlayerController : Actor
 
     private void UseItem()
     {
-        if (Input.GetKeyDown(KeyCode.L))
+        if (Input.GetAxis("Vertical") > 0 && Input.GetKeyDown(KeyCode.E))
             GameManager.Instance.UseCurrentItem();
     }
 }

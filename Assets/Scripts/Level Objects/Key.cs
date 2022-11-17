@@ -11,4 +11,21 @@ public class Key : Collectable
         GameManager.Instance.SetKey(keyName);
         base.Collect();
     }
+
+    public override void Use()
+    {
+        Debug.Log("need to make use case for key");
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.GetComponent<PlayerController>())
+            Collect();
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.GetComponent<PlayerController>())
+            Collect();
+    }
 }
