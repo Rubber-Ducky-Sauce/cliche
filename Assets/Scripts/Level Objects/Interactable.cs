@@ -19,7 +19,9 @@ public abstract class Interactable : MonoBehaviour
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.gameObject.GetComponent<PlayerController>())
+        {
             this.SetInteractable(null);
+        }
     }
     public abstract void Interact();
 }

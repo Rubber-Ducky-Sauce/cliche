@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEditor.Searcher.SearcherWindow.Alignment;
 
 public class PlayerController : Actor
 {
@@ -16,6 +17,10 @@ public class PlayerController : Actor
     public bool isFacingLeft;
     private bool isOnGround;
     public bool isMoving;
+    public bool isClimbing = false;
+
+    //todo?:set player to ladder center
+    //public Interactable interactable;
     [SerializeField]private float groundRay = 1f;
     private LayerMask groundLayer;
 
@@ -43,6 +48,7 @@ public class PlayerController : Actor
             movementSpeed = HandleSpeed();
             Move();
             Jump();
+            Climb();
             Interact();
             Sneak();
             UseItem();
@@ -73,8 +79,35 @@ public class PlayerController : Actor
 
     private void Jump()
     {
-        if (Input.GetButtonDown("Jump") && isOnGround && !isHiding)
+        if (Input.GetButtonDown("Jump") && (isOnGround || isClimbing) && !isHiding)
+        {
+            isClimbing = false;
+            rigidbody.gravityScale = 1;
             rigidbody.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+        }
+    }
+
+    private void Climb()
+    {
+        float vertical = Input.GetAxis("Vertical");
+        if (vertical>0 && !isClimbing && GameManager.Instance.currentInteractable?.GetComponent<Climbable>())
+        {
+            isClimbing = true;
+            rigidbody.velocity = Vector3.zero;
+        }
+
+        if (isClimbing && GameManager.Instance.currentInteractable != null && GameManager.Instance.currentInteractable.GetComponent<Climbable>())
+        {
+            rigidbody.gravityScale = 0;
+            transform.Translate(1 * Time.deltaTime * vertical * Vector3.up);
+        }
+
+        if (GameManager.Instance.currentInteractable == null && isClimbing || vertical < 0  && isOnGround)
+        {
+            isClimbing = false;
+            rigidbody.gravityScale = 1;
+        }
+
     }
 
     private void Interact()
@@ -85,7 +118,7 @@ public class PlayerController : Actor
 
     private void Sneak()
     {
-        _ = Input.GetAxis("Vertical") < 0 ? isSneaking = true : isSneaking = false;
+        _ = Input.GetAxis("Vertical") < 0 && !isClimbing? isSneaking = true : isSneaking = false;
     }
 
     private void DetectGround()
