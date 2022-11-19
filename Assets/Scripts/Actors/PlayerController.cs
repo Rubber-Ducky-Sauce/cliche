@@ -9,8 +9,8 @@ public class PlayerController : Actor
     [SerializeField]private float jumpForce = 5f;
 
     public bool isHiding = false;
-    public bool isCrouching = false;
-    private float crouchSpeed;
+    public bool isSneaking = false;
+    private float sneakSpeed;
     private float movementSpeed;
 
     public bool isFacingLeft;
@@ -29,7 +29,7 @@ public class PlayerController : Actor
 
         Speed = 5f;
         movementSpeed = Speed;
-        crouchSpeed = Speed / 3;
+        sneakSpeed = Speed / 3;
         groundLayer = LayerMask.GetMask("Ground");
         rigidbody = GetComponent<Rigidbody2D>();
     }
@@ -44,7 +44,7 @@ public class PlayerController : Actor
             Move();
             Jump();
             Interact();
-            Crouch();
+            Sneak();
             UseItem();
             //TryLock();
         }
@@ -54,7 +54,7 @@ public class PlayerController : Actor
     private void FixedUpdate()
     {
         if(light != null)
-        light.hiding = isHiding || isCrouching;
+        light.hiding = isHiding || isSneaking;
         DetectGround();
     }
     public override void Move()
@@ -83,9 +83,9 @@ public class PlayerController : Actor
             GameManager.Instance.currentInteractable.Interact();
     }
 
-    private void Crouch()
+    private void Sneak()
     {
-        _ = Input.GetAxis("Vertical") < 0 ? isCrouching = true : isCrouching = false;
+        _ = Input.GetAxis("Vertical") < 0 ? isSneaking = true : isSneaking = false;
     }
 
     private void DetectGround()
@@ -100,7 +100,7 @@ public class PlayerController : Actor
 
     private float HandleSpeed()
     {
-        return isCrouching?crouchSpeed:Speed;
+        return isSneaking?sneakSpeed:Speed;
     }
 
     private void GetIsGameActive()
