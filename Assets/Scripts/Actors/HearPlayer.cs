@@ -16,7 +16,7 @@ public class HearPlayer : MonoBehaviour
 
     private void Update()
     {
-        if((player.transform.position - transform.position).magnitude <= hearingDistance && player.isMoving && !player.isSneaking && !enemy.distracted)
+        if((player.transform.position - transform.position).magnitude <= hearingDistance && player.isMoving && !player.isSneaking && player.isOnGround && !enemy.distracted)
         {
             enemy.BecomeAlert();
         }

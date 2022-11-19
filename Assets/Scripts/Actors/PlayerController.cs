@@ -15,7 +15,7 @@ public class PlayerController : Actor
     private float movementSpeed;
 
     public bool isFacingLeft;
-    private bool isOnGround;
+    public bool isOnGround;
     public bool isMoving;
     public bool isClimbing = false;
 

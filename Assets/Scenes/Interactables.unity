@@ -1986,9 +1986,10 @@ MonoBehaviour:
   isHiding: 0
   isSneaking: 0
   isFacingLeft: 0
+  isOnGround: 0
   isMoving: 0
   isClimbing: 0
-  groundRay: 1
+  groundRay: 0.55
   gameActive: 1
 --- !u!212 &753125772
 SpriteRenderer:
