@@ -42,7 +42,19 @@ public class GameManager : MonoBehaviour
         Instance = this;
     }
 
-    public IEnumerator ReloadScene(float loadTime)
+    public void StartGame()
+    {
+        SceneManager.LoadScene(1);
+    
+        SceneManager.sceneLoaded += OnSceneLoaded;
+        
+    }
+
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        gameIsActive = true;
+    }
+public IEnumerator ReloadScene(float loadTime)
     {
         yield return new WaitForSeconds(loadTime);
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
