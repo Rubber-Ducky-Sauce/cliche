@@ -19,17 +19,28 @@ public class HidingPlace : Interactable
     }
     public override void Interact()
     {
-        player.isHiding = true;
-        audioSource.PlayOneShot(clip);
+        if (!player.isHiding)
+        {
+            StartCoroutine(QuickDisablePlayer());
+            player.isHiding = true;
+            audioSource.PlayOneShot(clip);
+        }
 
     }
 
     void ExitHiding()
     {
-        if(player.isHiding && Mathf.Abs(Input.GetAxis("Horizontal")) > 0)
+        if(player.isHiding && player.playerActive && Mathf.Abs(Input.GetAxis("Horizontal")) > 0)
         {
             player.isHiding = false;
             audioSource.PlayOneShot(clip);
         }
+    }
+
+    IEnumerator QuickDisablePlayer()
+    {
+        player.playerActive = false;
+        yield return new WaitForSeconds(.5f);
+        player.playerActive = true;
     }
 }

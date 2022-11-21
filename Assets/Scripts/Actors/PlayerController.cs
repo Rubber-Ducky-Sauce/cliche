@@ -33,6 +33,7 @@ public class PlayerController : Actor
     private LayerMask groundLayer;
 
     public bool gameActive;
+    public bool playerActive = true;
 
     // Start is called before the first frame update
     void Start()
@@ -51,7 +52,7 @@ public class PlayerController : Actor
     void Update()
     {
         GetIsGameActive();
-        if (gameActive)
+        if (gameActive && playerActive)
         {
             movementSpeed = HandleSpeed();
             Move();
@@ -71,6 +72,7 @@ public class PlayerController : Actor
         light.hiding = isHiding || isSneaking;
         DetectGround();
     }
+
     public override void Move()
     {
         float horizontal = Input.GetAxis("Horizontal");

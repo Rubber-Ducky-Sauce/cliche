@@ -2,14 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(AudioSource))]
 public class Enemy : Actor
 {
+    AudioSource audioSource;
+    [SerializeField] AudioClip[] moveSound;
+    [SerializeField] AudioClip alertSound;
+    bool walkPlaying = false;
+
     private float rayLength = .75f;
     private float rayX = 1;
     private float wallX = .7f;
     public float offSet = .55f;
     private LayerMask groundLayer;
-    private LayerMask playerLayer;
     private LayerMask IgnoreMe;
 
     bool playerFound;
@@ -34,13 +39,13 @@ public class Enemy : Actor
     // Start is called before the first frame update
     void Start()
     {
+        audioSource = GetComponent<AudioSource>();
         alertMarker = transform.Find("AlertMarker")?.gameObject;
         startPos = transform.position.x;
         facingRight = transform.localScale.x < 0;
         Speed = speed;
         InitDirection();
         groundLayer = LayerMask.GetMask("Ground");
-        playerLayer = LayerMask.GetMask("Player");
         IgnoreMe = LayerMask.GetMask("Interactable");
     }
 
@@ -59,6 +64,10 @@ public class Enemy : Actor
         DetectEdge();
         if (!posted) {
             transform.Translate(Speed * Time.deltaTime * Vector3.right);
+            if (!walkPlaying && !alert)
+                StartCoroutine(PlayWalkingSound());
+            if (!walkPlaying  && alert)
+                StartCoroutine(PlayRunningSound());
         }
 
     }
@@ -90,6 +99,7 @@ public class Enemy : Actor
         {
             playerFound = true;
             Debug.Log("Player Found! Straight to Jail!");
+            audioSource.PlayOneShot(alertSound);
             GameManager.Instance.SetIsGameActive(false);
             hit.collider.GetComponent<PlayerController>().gameActive = false;
             alertMarker.SetActive(true);
@@ -160,6 +170,7 @@ public class Enemy : Actor
         {
 
             alert = true;
+            audioSource.PlayOneShot(alertSound);
             Speed = Speed * 2f;
             postTime = postTime / 2f;
             alertMarker.SetActive(true);
@@ -188,5 +199,27 @@ public class Enemy : Actor
     public void BecomeDistracted(float distractionTime)
     {
         StartCoroutine(BeingDistracted(distractionTime));
+    }
+
+    IEnumerator PlayRunningSound()
+    {
+        walkPlaying = true;
+        AudioClip walkingClip = moveSound[Random.Range(0, moveSound.Length)];
+        audioSource.PlayOneShot(walkingClip);
+
+        yield return new WaitForSeconds(.35f);
+
+        walkPlaying = false;
+    }
+
+    IEnumerator PlayWalkingSound()
+    {
+        walkPlaying = true;
+        AudioClip walkingClip = moveSound[Random.Range(0, moveSound.Length)];
+        audioSource.PlayOneShot(walkingClip);
+
+        yield return new WaitForSeconds(.7f);
+
+        walkPlaying = false;
     }
 }

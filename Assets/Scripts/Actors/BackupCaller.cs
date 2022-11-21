@@ -4,16 +4,6 @@ using UnityEngine;
 
 public class BackupCaller : MonoBehaviour
 {
-    //instantiate backup
-
-    // have a reference to backupEnemy
-    //when enemy is alerted, instantiate backupEnemy
-    //backupEnemy position and direction
-    //position should be relative enemy and player
-    // reference player
-    //enemyBackup.pos.x = player.pos.x > enemy.pos.x? enemy.pos.x - spawnOffset : enemy.pos.x + spawnOffset
-    //note: localscal 1, facing left; -1 facing right
-
     [SerializeField]Enemy backupEnemy;
     [SerializeField] Enemy spawnedEnemy;
     Enemy baseEnemy;
@@ -23,6 +13,8 @@ public class BackupCaller : MonoBehaviour
     [SerializeField] bool backupSpawned = false;
     [SerializeField] float despawnTime = 5f;
     [SerializeField] float readyTime = 1f;
+
+    [SerializeField] AudioClip spawnSound;
 
     private void Start()
     {
@@ -54,6 +46,7 @@ public class BackupCaller : MonoBehaviour
             spawnedEnemy.isActive = false;
             spawnedEnemy.transform.position = transform.position + SpawnPointOffset;
         }
+        GameManager.Instance.PlaySound(spawnSound);
         StartCoroutine(ReadyEnemy());
         StartCoroutine(UnReadyEnemy());
         StartCoroutine(PrepareDespawn());
@@ -62,6 +55,7 @@ public class BackupCaller : MonoBehaviour
     private void DespawnBackup()
     {
         backupSpawned = false;
+        GameManager.Instance.PlaySound(spawnSound);
         spawnedEnemy.gameObject.SetActive(false);
     }
 

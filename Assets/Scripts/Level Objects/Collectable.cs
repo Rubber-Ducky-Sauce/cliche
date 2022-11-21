@@ -3,14 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+[RequireComponent(typeof(AudioSource))]
 public abstract class Collectable : MonoBehaviour
 {
     SpriteRenderer spriteRenderer;
+    public AudioClip pickUpSound;
     Image itemBoxItem;
 
     [SerializeField] float dropForce;
     [SerializeField] float dropheight;
     [SerializeField] private Vector3 DropOffset;
+
 
     protected new Rigidbody2D rigidbody;
     protected PlayerController player;
@@ -22,6 +25,8 @@ public abstract class Collectable : MonoBehaviour
 
     public virtual void Collect()
     {
+
+        GameManager.Instance.PlaySound(pickUpSound);
         if (GameManager.Instance.currentCollectable != null)
         GameManager.Instance.currentCollectable.DropItem();
         GameManager.Instance.currentCollectable = this;

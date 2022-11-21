@@ -8,6 +8,8 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
     MusicManager musicManager;
+    AudioSource audioSource;
+    [SerializeField]AudioClip buttonSound;
 
     [SerializeField] private string m_activeKey = null;
     [SerializeField] public Lock currentLock = null;
@@ -48,7 +50,8 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        musicManager = GetComponent<MusicManager>();
+        audioSource = GetComponent<AudioSource>();
+        musicManager = GameObject.Find("MusicManager").GetComponent<MusicManager>();
         if(SceneManager.GetActiveScene().buildIndex == 0)
         {
             musicManager.PlaySong(musicManager.menu);
@@ -58,7 +61,7 @@ public class GameManager : MonoBehaviour
     public void StartGame()
     {
         SceneManager.LoadScene(1);
-    
+        PlaySound(buttonSound);
         SceneManager.sceneLoaded += OnSceneLoaded;
         
     }
@@ -73,6 +76,8 @@ public IEnumerator ReloadScene(float loadTime)
     {
         yield return new WaitForSeconds(loadTime);
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+
+        SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
     public void LoadScene(string sceneName)
@@ -107,5 +112,10 @@ public IEnumerator ReloadScene(float loadTime)
             currentCollectable.Use();
         else
             Debug.Log("no usable item");
+    }
+
+    public void PlaySound(AudioClip clip)
+    {
+        audioSource.PlayOneShot(clip);
     }
 }

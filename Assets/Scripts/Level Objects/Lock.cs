@@ -6,11 +6,9 @@ public class Lock : Interactable
 {
     [SerializeField] private bool locked = true;
     [SerializeField] string keyName;
+    [SerializeField] AudioClip unlockClip;
+    [SerializeField] AudioClip failClip;
 
-    private void Update()
-    {
-        
-    }
     public override void Interact()
     {
         if (locked &&
@@ -19,13 +17,19 @@ public class Lock : Interactable
             locked = false;
             Debug.Log("door unlocked");
             GameManager.Instance.DepleteItem();
+            GameManager.Instance.PlaySound(unlockClip);
             if(isSceneTrigger) IOTrigger = !locked;
         }
         if (!locked)
         {
             Debug.Log("not locked...");
+            GameManager.Instance.PlaySound(failClip);
         }
-        else Debug.Log("Need Specific Key");
+        else
+        {
+            Debug.Log("Need Specific Key");
+            GameManager.Instance.PlaySound(failClip);
+        }
     }
 
     public void OtherFunct()

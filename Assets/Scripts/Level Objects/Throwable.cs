@@ -7,6 +7,7 @@ public abstract class Throwable : Collectable
     [SerializeField] float throwForce;
     [SerializeField] float throwheight;
     [SerializeField] private Vector3 offset;
+    [SerializeField] AudioClip throwSound;
 
     public override void Use()
     {
@@ -21,6 +22,7 @@ public abstract class Throwable : Collectable
         transform.position = player.transform.position + offset;
         rigidbody.bodyType = RigidbodyType2D.Dynamic;
         
+        GameManager.Instance.PlaySound(throwSound);
         rigidbody.AddForce(new Vector2(player.isFacingLeft? -throwForce: throwForce,throwheight),ForceMode2D.Impulse);
         GetComponent<PolygonCollider2D>().isTrigger = false;
     }
