@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
+    MusicManager musicManager;
 
     [SerializeField] private string m_activeKey = null;
     [SerializeField] public Lock currentLock = null;
@@ -40,6 +41,18 @@ public class GameManager : MonoBehaviour
             return;
         }
         Instance = this;
+        DontDestroyOnLoad(gameObject);
+    }
+
+    
+
+    private void Start()
+    {
+        musicManager = GetComponent<MusicManager>();
+        if(SceneManager.GetActiveScene().buildIndex == 0)
+        {
+            musicManager.PlaySong(musicManager.menu);
+        }
     }
 
     public void StartGame()
@@ -53,7 +66,9 @@ public class GameManager : MonoBehaviour
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         gameIsActive = true;
+        musicManager.PlaySong(musicManager.level1);
     }
+
 public IEnumerator ReloadScene(float loadTime)
     {
         yield return new WaitForSeconds(loadTime);

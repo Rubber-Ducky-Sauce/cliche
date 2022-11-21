@@ -6,7 +6,8 @@ public class PlayerController : Actor
 {
     private new Rigidbody2D rigidbody;
     private new LightController light;
-    [SerializeField]private float jumpForce = 5f;
+    [SerializeField] private float jumpForce = 5f;
+    private AudioSource audioSource;
 
     public bool isHiding = false;
     public bool isSneaking = false;
@@ -17,6 +18,14 @@ public class PlayerController : Actor
     public bool isOnGround;
     public bool isMoving;
     public bool isClimbing = false;
+
+    [SerializeField] AudioClip[] move;
+    [SerializeField] AudioClip jump;
+    [SerializeField] AudioClip climb;
+    [SerializeField] AudioClip interact;
+    [SerializeField] AudioClip sneak;
+    [SerializeField] AudioClip hide;
+    [SerializeField]bool walkPlaying = false;
 
     //todo?:set player to ladder center
     //public Interactable interactable;
@@ -30,7 +39,7 @@ public class PlayerController : Actor
     {
         if(GameObject.Find("Player Light"))
         light = GameObject.Find("Player Light").GetComponent<LightController>();
-
+        audioSource = GetComponent<AudioSource>();
         Speed = 5f;
         movementSpeed = Speed;
         sneakSpeed = Speed / 3;
@@ -74,6 +83,11 @@ public class PlayerController : Actor
             isFacingLeft = true;
 
         isMoving = isOnGround && horizontal != 0;
+        if(!walkPlaying && isMoving && !isSneaking)
+        StartCoroutine(PlayWalkingSound());
+        if (!walkPlaying && isMoving && isSneaking)
+            StartCoroutine(PlaySneakingSound());
+
     }
 
     private void Jump()
@@ -83,6 +97,7 @@ public class PlayerController : Actor
             isClimbing = false;
             rigidbody.gravityScale = 1;
             rigidbody.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+            audioSource.PlayOneShot(jump);
         }
     }
 
@@ -144,5 +159,27 @@ public class PlayerController : Actor
     {
         if (Input.GetAxis("Vertical") > 0 && Input.GetKeyDown(KeyCode.E))
             GameManager.Instance.UseCurrentItem();
+    }
+
+    IEnumerator PlayWalkingSound()
+    {
+        walkPlaying = true;
+        AudioClip walkingClip = move[Random.Range(0, move.Length)];
+        audioSource.PlayOneShot(walkingClip);
+
+        yield return new WaitForSeconds(.35f);
+
+        walkPlaying = false;
+    }
+
+    IEnumerator PlaySneakingSound()
+    {
+        walkPlaying = true;
+        AudioClip walkingClip = move[Random.Range(0, move.Length)];
+        audioSource.PlayOneShot(walkingClip);
+
+        yield return new WaitForSeconds(.7f);
+
+        walkPlaying = false;
     }
 }
