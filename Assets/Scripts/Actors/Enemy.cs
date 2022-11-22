@@ -28,7 +28,7 @@ public class Enemy : Actor
     [SerializeField] GameObject alertMarker;
     [SerializeField] bool facingRight;
     [SerializeField] public bool usingMovementDistance = false;
-    [SerializeField] float startPos;
+    public float startPos;
     [SerializeField][Range(0,10)] public float movementDist;
     [SerializeField]public bool alert = false;
     public bool isActive = true;

@@ -46,6 +46,7 @@ public class BackupCaller : MonoBehaviour
             spawnedEnemy.isActive = false;
             spawnedEnemy.transform.position = transform.position + SpawnPointOffset;
         }
+        spawnedEnemy.startPos = spawnedEnemy.transform.position.x;
         GameManager.Instance.PlaySound(spawnSound);
         StartCoroutine(ReadyEnemy());
         StartCoroutine(UnReadyEnemy());

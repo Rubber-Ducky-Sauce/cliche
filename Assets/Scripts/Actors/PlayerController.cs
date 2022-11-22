@@ -20,7 +20,7 @@ public class PlayerController : Actor
     public bool isClimbing = false;
 
     [SerializeField] AudioClip[] move;
-    [SerializeField] AudioClip jump;
+    [SerializeField] AudioClip[] jump;
     [SerializeField] AudioClip climb;
     [SerializeField] AudioClip interact;
     [SerializeField] AudioClip sneak;
@@ -99,7 +99,7 @@ public class PlayerController : Actor
             isClimbing = false;
             rigidbody.gravityScale = 1;
             rigidbody.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
-            audioSource.PlayOneShot(jump);
+            audioSource.PlayOneShot(jump[Random.Range(0, jump.Length)]);
         }
     }
 

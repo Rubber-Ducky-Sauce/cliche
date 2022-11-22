@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-[RequireComponent(typeof(AudioSource))]
 public abstract class Collectable : MonoBehaviour
 {
     SpriteRenderer spriteRenderer;
