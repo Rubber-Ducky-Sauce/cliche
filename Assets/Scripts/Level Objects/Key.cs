@@ -8,8 +8,8 @@ public class Key : Collectable
     // Start is called before the first frame update
     public override  void Collect()
     {
-        GameManager.Instance.SetKey(keyName);
         base.Collect();
+        GameManager.Instance.SetKey(keyName);
     }
 
     public override void Use()

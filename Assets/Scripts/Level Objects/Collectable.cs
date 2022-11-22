@@ -46,7 +46,7 @@ public abstract class Collectable : MonoBehaviour
         this.gameObject.SetActive(true);
         transform.position = player.transform.position + DropOffset;
         rigidbody.bodyType = RigidbodyType2D.Dynamic;
-
+        GameManager.Instance.SetKey("");
         rigidbody.AddForce(new Vector2(player.isFacingLeft ? dropForce : -dropForce, dropheight), ForceMode2D.Impulse);
         GetComponent<PolygonCollider2D>().isTrigger = false;
     }

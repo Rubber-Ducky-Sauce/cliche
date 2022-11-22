@@ -17,6 +17,7 @@ public class Lock : Interactable
             locked = false;
             Debug.Log("door unlocked");
             GameManager.Instance.DepleteItem();
+            GameManager.Instance.SetKey("");
             GameManager.Instance.PlaySound(unlockClip);
             if(isSceneTrigger) IOTrigger = !locked;
         }
