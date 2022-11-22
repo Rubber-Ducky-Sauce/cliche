@@ -101,6 +101,7 @@ public class Enemy : Actor
             playerFound = true;
             audioSource.PlayOneShot(alertSound);
             audioSource.PlayOneShot(caught);
+            GameManager.Instance.SetKey("");
             GameManager.Instance.SetIsGameActive(false);
             hit.collider.GetComponent<PlayerController>().gameActive = false;
             alertMarker.SetActive(true);
