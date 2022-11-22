@@ -8,6 +8,7 @@ public class Enemy : Actor
     AudioSource audioSource;
     [SerializeField] AudioClip[] moveSound;
     [SerializeField] AudioClip alertSound;
+    [SerializeField] AudioClip caught;
     bool walkPlaying = false;
 
     private float rayLength = .75f;
@@ -98,8 +99,8 @@ public class Enemy : Actor
         if (hit.collider != null  && hit.collider.tag == "Player" && !IsPlayerHiding(hit.collider.gameObject))
         {
             playerFound = true;
-            Debug.Log("Player Found! Straight to Jail!");
             audioSource.PlayOneShot(alertSound);
+            audioSource.PlayOneShot(caught);
             GameManager.Instance.SetIsGameActive(false);
             hit.collider.GetComponent<PlayerController>().gameActive = false;
             alertMarker.SetActive(true);

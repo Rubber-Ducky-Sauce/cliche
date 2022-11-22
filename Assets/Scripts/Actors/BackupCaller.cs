@@ -15,9 +15,14 @@ public class BackupCaller : MonoBehaviour
     [SerializeField] float readyTime = 1f;
 
     [SerializeField] AudioClip spawnSound;
+    [SerializeField] AudioClip spawnSound2;
+    private GameObject smokeBomb;
+    private ParticleSystem smokeBombPS;
 
     private void Start()
     {
+        smokeBomb = transform.Find("Smoke Bomb")?.gameObject;
+        smokeBombPS = smokeBomb.GetComponent<ParticleSystem>();
         player = FindObjectOfType<PlayerController>();
         baseEnemy = GetComponent<Enemy>();
     }
@@ -47,7 +52,11 @@ public class BackupCaller : MonoBehaviour
             spawnedEnemy.transform.position = transform.position + SpawnPointOffset;
         }
         spawnedEnemy.startPos = spawnedEnemy.transform.position.x;
+        smokeBomb.transform.position = spawnedEnemy.transform.position;
+        smokeBomb.SetActive(true);
+        smokeBombPS.Play();
         GameManager.Instance.PlaySound(spawnSound);
+        GameManager.Instance.PlaySound(spawnSound2);
         StartCoroutine(ReadyEnemy());
         StartCoroutine(UnReadyEnemy());
         StartCoroutine(PrepareDespawn());
@@ -56,8 +65,11 @@ public class BackupCaller : MonoBehaviour
     private void DespawnBackup()
     {
         backupSpawned = false;
-        GameManager.Instance.PlaySound(spawnSound);
+        GameManager.Instance.PlaySound(spawnSound2);
+        smokeBomb.transform.position = spawnedEnemy.transform.position;
+        smokeBombPS.Play();
         spawnedEnemy.gameObject.SetActive(false);
+
     }
 
     IEnumerator PrepareDespawn()
