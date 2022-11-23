@@ -8,6 +8,7 @@ public class Lock : Interactable
     [SerializeField] string keyName;
     [SerializeField] AudioClip unlockClip;
     [SerializeField] AudioClip failClip;
+    [SerializeField] GameObject removalble;
 
     public override void Interact()
     {
@@ -20,6 +21,7 @@ public class Lock : Interactable
             GameManager.Instance.SetKey("");
             GameManager.Instance.PlaySound(unlockClip);
             if(isSceneTrigger) IOTrigger = !locked;
+            if(removalble != null) removalble.SetActive(false);
         }
         if (!locked)
         {
