@@ -56,6 +56,9 @@ TagManager:
   - name: Enemy
     uniqueID: 1486415317
     locked: 0
+  - name: Ground
+    uniqueID: 1353753195
+    locked: 0
   - name: Foreground
     uniqueID: 2578534241
     locked: 0

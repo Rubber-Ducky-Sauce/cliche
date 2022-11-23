@@ -35,8 +35,8 @@ public class WanderingEye : MonoBehaviour
         if (playerHit)
         {
             Debug.Log("player found");
-            //GameManager.Instance.PlaySound(alertSound);
-            //GameManager.Instance.PlaySound(caught);
+            GameManager.Instance.PlaySound(alertSound);
+            GameManager.Instance.PlaySound(caught);
             GameManager.Instance.SetKey("");
             GameManager.Instance.SetIsGameActive(false);
             StartCoroutine(GameManager.Instance.ReloadScene(2f));
@@ -56,14 +56,12 @@ public class WanderingEye : MonoBehaviour
 
     void ScanArea()
     {
-        
+        if(!posted)
         transform.Rotate(0f, 0f, scanSpeed * Time.deltaTime);
         
         if (ReachScanDistance())
         {
-            
-            transform.eulerAngles = new Vector3(transform.eulerAngles.x, transform.eulerAngles.y, (rotation > 0 ? scanDistance : -scanDistance));
-            scanSpeed = -scanSpeed;
+            StartCoroutine(PostAndReverse(2));
         }
             
     }
@@ -78,8 +76,19 @@ public class WanderingEye : MonoBehaviour
         {
             rotation = transform.eulerAngles.z - 360f;
         }
-        //the closer rotation is to scandistance, slow down
-        //go back up approaching 0
         return (Mathf.Abs(rotation) > Mathf.Abs(scanDistance));
+    }
+
+    public IEnumerator PostAndReverse(float postTime)
+    {
+        posted = true;
+        transform.eulerAngles = new Vector3(transform.eulerAngles.x, transform.eulerAngles.y, (rotation > 0 ? scanDistance : -scanDistance));
+        scanSpeed = -scanSpeed;
+        yield return new WaitForSeconds(postTime);
+        if (!playerHit)
+        {
+            posted = false;
+
+        }
     }
 }
