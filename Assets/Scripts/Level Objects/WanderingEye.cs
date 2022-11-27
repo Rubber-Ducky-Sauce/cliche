@@ -51,7 +51,6 @@ public class WanderingEye : MonoBehaviour
         Debug.DrawRay(transform.position, direction * 10f, Color.yellow);
 
         playerHit = hit.collider != null && hit.collider.CompareTag("Player");
-        Debug.Log(playerHit);
     }
 
     void ScanArea()

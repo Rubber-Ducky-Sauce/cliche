@@ -19,15 +19,16 @@ public class Enemy : Actor
     private LayerMask IgnoreMe;
 
     bool playerFound;
+    private GameObject player;
 
     [SerializeField] private float speed = 1f;
     public float detectDistance = 5f;
     [SerializeField] float postTime;
     [SerializeField] float wallPostTime;
-    [SerializeField] bool posted = false;
+    [SerializeField] public bool posted = false;
     [SerializeField] private bool gameActive;
     [SerializeField] GameObject alertMarker;
-    [SerializeField] bool facingRight;
+    [SerializeField] public bool facingRight;
     [SerializeField] public bool usingMovementDistance = false;
     public float startPos;
     [SerializeField][Range(0,10)] public float movementDist;
@@ -35,30 +36,35 @@ public class Enemy : Actor
     public bool isActive = true;
 
     public bool distracted = false;
+    public bool becomeAlert = false;
 
 
     // Start is called before the first frame update
     void Start()
     {
+        player = GameObject.Find("Player");
         audioSource = GetComponent<AudioSource>();
         alertMarker = transform.Find("AlertMarker")?.gameObject;
         startPos = transform.position.x;
-        facingRight = transform.localScale.x < 0;
         Speed = speed;
         InitDirection();
         groundLayer = LayerMask.GetMask("Ground");
         IgnoreMe = LayerMask.GetMask("Interactable");
+        facingRight = transform.localScale.x < 0;
     }
 
     // Update is called once per frame
     void Update()
     {
+        facingRight = transform.localScale.x < 0;
         GetIsGameActive();
         if (gameActive && isActive  && !distracted)
         {
             Move();
             DetectPlayer();
         }
+        if(becomeAlert)
+            posted = true;
     }
     public override void Move()
     {
@@ -125,6 +131,7 @@ public class Enemy : Actor
     public IEnumerator TurnAround(float postTime)
     {
         posted = true;
+
         wallX = -wallX;
         rayX = -rayX;
         Speed = -Speed;
@@ -132,16 +139,15 @@ public class Enemy : Actor
         if (!playerFound)
         {
             posted = false;
-
-
             offSet = -offSet;
             transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
+            facingRight = transform.localScale.x < 0;
             detectDistance = -detectDistance;
         }
     }
     public void InitDirection()
     {
-        if (!facingRight)
+        if (facingRight)
         {
             wallX = -wallX;
             rayX = -rayX;
@@ -170,11 +176,17 @@ public class Enemy : Actor
     {
         if (!alert)
         {
-
             alert = true;
             audioSource.PlayOneShot(alertSound);
+            StartCoroutine(SuddenShock());
+            if ((facingRight && player.transform.position.x < transform.position.x) ||
+                (!facingRight && player.transform.position.x > transform.position.x))
+            {
+                StartCoroutine(TurnAround(1f));
+            }
+
             Speed = Speed * 2f;
-            postTime = postTime / 2f;
+            //postTime = postTime / 2f;
             alertMarker.SetActive(true);
             StartCoroutine(CalmDown());
         }
@@ -183,11 +195,11 @@ public class Enemy : Actor
 
     IEnumerator CalmDown()
     {
-        yield return new WaitForSeconds(5);
+        yield return new WaitForSeconds(10);
         alert = false;
         Speed = Speed / 2f;
 
-        postTime = postTime * 2f;
+        //postTime = postTime * 2f;
         alertMarker.SetActive(false);
     }
 
@@ -223,5 +235,13 @@ public class Enemy : Actor
         yield return new WaitForSeconds(.7f);
 
         walkPlaying = false;
+    }
+
+    IEnumerator SuddenShock()
+    {
+        becomeAlert = true;
+        yield return new WaitForSeconds(2);
+        becomeAlert = false;
+        posted = false;
     }
 }

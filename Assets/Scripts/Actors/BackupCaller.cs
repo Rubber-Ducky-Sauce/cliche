@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -16,8 +17,10 @@ public class BackupCaller : MonoBehaviour
 
     [SerializeField] AudioClip spawnSound;
     [SerializeField] AudioClip spawnSound2;
+    [SerializeField] AudioClip callBackupSound;
     private GameObject smokeBomb;
     private ParticleSystem smokeBombPS;
+    private bool callingBackup = false;
 
     private void Start()
     {
@@ -31,13 +34,27 @@ public class BackupCaller : MonoBehaviour
     {
         if (baseEnemy.alert && !backupSpawned)
         {
-            SpawnBackup(backupEnemy);
+            StartCoroutine(CallBackup());
         }
+        if(callingBackup)
+            baseEnemy.posted = true;
     }
-
-    private void SpawnBackup(Enemy enemy)
+    private IEnumerator CallBackup()
     {
         backupSpawned = true;
+        baseEnemy.posted = true;
+        callingBackup = true;
+        GameManager.Instance.PlaySound(spawnSound2);
+        yield return new WaitForSeconds(2);
+        callingBackup = false;
+        GameManager.Instance.PlaySound(callBackupSound);
+        StartCoroutine(SpawnBackup(backupEnemy));
+    }
+    
+    private IEnumerator SpawnBackup(Enemy enemy)
+    {
+        yield return new WaitForSeconds(1.5f);
+        //baseEnemy.posted = false;
         Vector3 SpawnPointOffset = player.transform.position.x < transform.position.x ? new Vector3(offset, 0, 0): new Vector3(-offset, 0, 0);
         if (spawnedEnemy == null)
         {
@@ -54,12 +71,14 @@ public class BackupCaller : MonoBehaviour
         spawnedEnemy.startPos = spawnedEnemy.transform.position.x;
         smokeBomb.transform.position = spawnedEnemy.transform.position;
         smokeBomb.SetActive(true);
-        smokeBombPS.Play();
-        GameManager.Instance.PlaySound(spawnSound);
         GameManager.Instance.PlaySound(spawnSound2);
+        smokeBombPS.Play();
         StartCoroutine(ReadyEnemy());
         StartCoroutine(UnReadyEnemy());
         StartCoroutine(PrepareDespawn());
+
+        FinishCall();
+
     }
 
     private void DespawnBackup()
@@ -88,5 +107,11 @@ public class BackupCaller : MonoBehaviour
     {
         yield return new WaitForSeconds(despawnTime - 1f);
         spawnedEnemy.isActive = false;
+    }
+
+    void FinishCall()
+    {
+        callingBackup = false;
+        baseEnemy.posted = false;
     }
 }
