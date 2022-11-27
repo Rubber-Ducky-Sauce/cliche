@@ -12,10 +12,12 @@ public class Switch : MonoBehaviour
     [SerializeField] float pressedSize = .73f;
     [SerializeField] AudioClip cilp1;
     [SerializeField] AudioClip cilp2;
-    
+    PlayerController player;
+
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log("you got me");
+        player = collision.GetComponent<PlayerController>();
         if(triggerType == TriggerType.materialize)
         hiddenObject.SetActive(true);
         if(triggerType == TriggerType.activate)
@@ -23,13 +25,15 @@ public class Switch : MonoBehaviour
             Debug.Log("activate something");
         }
         GetComponent<PolygonCollider2D>().enabled = false;
+        player.playerActive = false;
         StartCoroutine(CollapseSwitch());
     }
 
     IEnumerator CollapseSwitch()
     {
         GameManager.Instance.PlaySound(cilp1);
-        yield return new WaitForSeconds(.2f);
+        yield return new WaitForSeconds(.01f);
+        player.playerActive = true;
         GameManager.Instance.PlaySound(cilp2);
         GetComponent<BoxCollider2D>().size = new Vector2(GetComponent<BoxCollider2D>().size.x, pressedSize);
     }
