@@ -16,6 +16,8 @@ public class Enemy : Actor
     private float wallX = .7f;
     public float offSet = .55f;
     private LayerMask groundLayer;
+    private float groundRay = 0.55f;
+    public bool isOnGround = false;
     private LayerMask IgnoreMe;
 
     bool playerFound;
@@ -47,7 +49,7 @@ public class Enemy : Actor
         alertMarker = transform.Find("AlertMarker")?.gameObject;
         startPos = transform.position.x;
         Speed = speed;
-        InitDirection();
+        //InitDirection();
         groundLayer = LayerMask.GetMask("Ground");
         IgnoreMe = LayerMask.GetMask("Interactable");
         facingRight = transform.localScale.x < 0;
@@ -58,13 +60,18 @@ public class Enemy : Actor
     {
         facingRight = transform.localScale.x < 0;
         GetIsGameActive();
-        if (gameActive && isActive  && !distracted)
+        if (gameActive && isActive  && !distracted && isOnGround)
         {
             Move();
             DetectPlayer();
         }
         if(becomeAlert)
             posted = true;
+    }
+
+    private void FixedUpdate()
+    {
+        DetectGround();
     }
     public override void Move()
     {
@@ -197,7 +204,7 @@ public class Enemy : Actor
     {
         yield return new WaitForSeconds(10);
         alert = false;
-        Speed = Speed / 2f;
+        Speed /= 2f;
 
         //postTime = postTime * 2f;
         alertMarker.SetActive(false);
@@ -243,5 +250,15 @@ public class Enemy : Actor
         yield return new WaitForSeconds(2);
         becomeAlert = false;
         posted = false;
+    }
+
+    private void DetectGround()
+    {
+        //draws ray to ground
+        Vector2 direction = Vector2.down;
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, direction, groundRay, groundLayer);
+        Debug.DrawRay(transform.position, direction * groundRay, Color.yellow);
+
+        isOnGround = hit.collider != null;
     }
 }

@@ -16,6 +16,7 @@ public class BackupCaller : MonoBehaviour
     [SerializeField] float readyTime = 1f;
 
     [SerializeField] AudioClip spawnSound;
+    [SerializeField] AudioClip despawnSound;
     [SerializeField] AudioClip spawnSound2;
     [SerializeField] AudioClip callBackupSound;
     private GameObject smokeBomb;
@@ -53,7 +54,7 @@ public class BackupCaller : MonoBehaviour
     
     private IEnumerator SpawnBackup(Enemy enemy)
     {
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(2f);
         //baseEnemy.posted = false;
         Vector3 SpawnPointOffset = player.transform.position.x < transform.position.x ? new Vector3(offset, 0, 0): new Vector3(-offset, 0, 0);
         if (spawnedEnemy == null)
@@ -71,6 +72,7 @@ public class BackupCaller : MonoBehaviour
         spawnedEnemy.startPos = spawnedEnemy.transform.position.x;
         smokeBomb.transform.position = spawnedEnemy.transform.position;
         smokeBomb.SetActive(true);
+        GameManager.Instance.PlaySound(spawnSound);
         GameManager.Instance.PlaySound(spawnSound2);
         smokeBombPS.Play();
         StartCoroutine(ReadyEnemy());
@@ -85,6 +87,7 @@ public class BackupCaller : MonoBehaviour
     {
         backupSpawned = false;
         GameManager.Instance.PlaySound(spawnSound2);
+        GameManager.Instance.PlaySound(despawnSound);
         smokeBomb.transform.position = spawnedEnemy.transform.position;
         smokeBombPS.Play();
         spawnedEnemy.gameObject.SetActive(false);

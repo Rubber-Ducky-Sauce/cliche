@@ -5501,9 +5501,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: enemy
       objectReference: {fileID: 0}
+    - target: {fileID: 2483627998820339320, guid: 0bc354f2d420add428072056d7d5292e, type: 3}
+      propertyPath: spawnSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 6dafb2fb02a124446bd55f26cc271e6d, type: 3}
+    - target: {fileID: 2483627998820339320, guid: 0bc354f2d420add428072056d7d5292e, type: 3}
+      propertyPath: despawnSound
+      value: 
+      objectReference: {fileID: 8300000, guid: ead3d78df89952642b3a78d100839e1d, type: 3}
     - target: {fileID: 2483627998820339324, guid: 0bc354f2d420add428072056d7d5292e, type: 3}
       propertyPath: m_RootOrder
       value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 2483627998820339324, guid: 0bc354f2d420add428072056d7d5292e, type: 3}
+      propertyPath: m_LocalScale.x
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 2483627998820339324, guid: 0bc354f2d420add428072056d7d5292e, type: 3}
       propertyPath: m_LocalPosition.x
@@ -5544,6 +5556,10 @@ PrefabInstance:
     - target: {fileID: 2483627998820339324, guid: 0bc354f2d420add428072056d7d5292e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2483627998820339326, guid: 0bc354f2d420add428072056d7d5292e, type: 3}
+      propertyPath: groundRay
+      value: 0.55
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0bc354f2d420add428072056d7d5292e, type: 3}
