@@ -13,4 +13,11 @@ public class ButtonThroughKeySelection : MonoBehaviour
                      this.gameObject);
     }
 
+    private void Update()
+    {
+        if(EventSystem.current.currentSelectedGameObject == null)
+            EventSystem.current.SetSelectedGameObject(
+                     this.gameObject);
+    }
+
 }
