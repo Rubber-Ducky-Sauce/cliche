@@ -19,6 +19,7 @@ public abstract class Throwable : Collectable
     {
         GetReferences();
         this.gameObject.SetActive(true);
+        offset.x = player.isFacingLeft ? -1 : 1;
         transform.position = player.transform.position + offset;
         rigidbody.bodyType = RigidbodyType2D.Dynamic;
         

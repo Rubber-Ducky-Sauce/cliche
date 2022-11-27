@@ -56,6 +56,7 @@ public class PlayerController : Actor
         {
             movementSpeed = HandleSpeed();
             Move();
+            JumpDown();
             Jump();
             Climb();
             Interact();
@@ -96,8 +97,7 @@ public class PlayerController : Actor
     {
         if (Input.GetButtonDown("Jump") && (isOnGround || isClimbing) && !isHiding)
         {
-            isClimbing = false;
-            rigidbody.gravityScale = 1;
+            EndClimb();
             rigidbody.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
             audioSource.PlayOneShot(jump[Random.Range(0, jump.Length)]);
         }
@@ -120,8 +120,7 @@ public class PlayerController : Actor
 
         if (GameManager.Instance.currentInteractable == null && isClimbing || vertical < 0  && isOnGround)
         {
-            isClimbing = false;
-            rigidbody.gravityScale = 1;
+            EndClimb();
         }
 
     }
@@ -134,6 +133,7 @@ public class PlayerController : Actor
 
     private void Sneak()
     {
+
         _ = Input.GetAxis("Vertical") < 0 && !isClimbing? isSneaking = true : isSneaking = false;
     }
 
@@ -183,5 +183,19 @@ public class PlayerController : Actor
         yield return new WaitForSeconds(.7f);
 
         walkPlaying = false;
+    }
+
+    void JumpDown()
+    {
+        if(isClimbing && Input.GetAxis("Vertical") < 0 && Input.GetKeyDown(KeyCode.Space))
+        {
+            EndClimb();
+        }
+    }
+
+    void EndClimb()
+    {
+        isClimbing = false;
+        rigidbody.gravityScale = 1;
     }
 }
