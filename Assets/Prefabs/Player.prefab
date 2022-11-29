@@ -13,7 +13,8 @@ GameObject:
   - component: {fileID: 8078098608841889168}
   - component: {fileID: 1548752199485173635}
   - component: {fileID: 1363368989776816198}
-  - component: {fileID: 6369341879696018625}
+  - component: {fileID: 753125781}
+  - component: {fileID: 753125780}
   m_Layer: 7
   m_Name: Player
   m_TagString: Player
@@ -191,8 +192,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -996609637
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: 1440440380, guid: 43e2db33f9007cd49a35153a34c6ef09, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -218,7 +219,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.0560112, y: 0}
+  m_Offset: {x: -0.0242244, y: -0.036024988}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -229,9 +230,9 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.8879776, y: 1}
+  m_Size: {x: 0.56163335, y: 0.92795}
   m_EdgeRadius: 0
---- !u!95 &6369341879696018625
+--- !u!95 &753125781
 Animator:
   serializedVersion: 4
   m_ObjectHideFlags: 0
@@ -251,3 +252,45 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &753125780
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8078098608841889174}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80590a108528cde42ad521f77593ec21, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  jumpForce: 5
+  isHiding: 0
+  isSneaking: 0
+  isFacingLeft: 0
+  isOnGround: 0
+  isMoving: 0
+  isClimbing: 0
+  move:
+  - {fileID: 8300000, guid: f772ea03daf797644b8f0b22c4d985c0, type: 3}
+  - {fileID: 8300000, guid: dd4413353e3188d4b93384f4c3b92f00, type: 3}
+  - {fileID: 8300000, guid: b370c397d4277794c8cc667f80229b63, type: 3}
+  - {fileID: 8300000, guid: 6e042751f64f80e46b3e3a1346f90620, type: 3}
+  - {fileID: 8300000, guid: 95cba785b1d43e844a7317f18c5aad9d, type: 3}
+  - {fileID: 8300000, guid: ea6abb65db74cae4b988f0f6ca23214c, type: 3}
+  - {fileID: 8300000, guid: 61c55b78f1ee7924c92bc56103728d77, type: 3}
+  - {fileID: 8300000, guid: 7e4302996bf56d64f9cc3531153a4de5, type: 3}
+  - {fileID: 8300000, guid: 21d4ab526233231478be69b2c4c3fe51, type: 3}
+  - {fileID: 8300000, guid: abcc716641a8de9468dff7e52a4444a1, type: 3}
+  jump:
+  - {fileID: 8300000, guid: d7d3b533fb95b1144905e7d5b98356ce, type: 3}
+  - {fileID: 8300000, guid: 3f9299b52846fee4d8aee2418385b4ee, type: 3}
+  - {fileID: 8300000, guid: 7e4c70076d168414bad0250ec75e8a1b, type: 3}
+  climb: {fileID: 0}
+  interact: {fileID: 0}
+  sneak: {fileID: 0}
+  hide: {fileID: 0}
+  walkPlaying: 0
+  groundRay: 0.55
+  gameActive: 0
+  playerActive: 1
