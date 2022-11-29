@@ -22,6 +22,7 @@ public class HidingPlace : Interactable
             StartCoroutine(QuickDisablePlayer());
             player.isHiding = true;
             GameManager.Instance.PlaySound(clip);
+            player.SetAnimBool("isHiding", true);
         }
 
     }
@@ -32,6 +33,7 @@ public class HidingPlace : Interactable
         {
             player.isHiding = false;
             GameManager.Instance.PlaySound(clip);
+            player.SetAnimBool("isHiding", false);
         }
     }
 

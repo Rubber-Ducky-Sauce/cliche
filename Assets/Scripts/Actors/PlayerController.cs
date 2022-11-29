@@ -8,6 +8,8 @@ public class PlayerController : Actor
     private new LightController light;
     [SerializeField] private float jumpForce = 5f;
     private AudioSource audioSource;
+    private SpriteRenderer spriteRenderer;
+    private Animator animator;
 
     public bool isHiding = false;
     public bool isSneaking = false;
@@ -46,6 +48,8 @@ public class PlayerController : Actor
         sneakSpeed = Speed / 3;
         groundLayer = LayerMask.GetMask("Ground");
         rigidbody = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame
@@ -64,7 +68,7 @@ public class PlayerController : Actor
             UseItem();
             //TryLock();
         }
-
+        spriteRenderer.flipX = isFacingLeft;
     }
 
     private void FixedUpdate()
@@ -197,5 +201,10 @@ public class PlayerController : Actor
     {
         isClimbing = false;
         rigidbody.gravityScale = 1;
+    }
+
+    public void SetAnimBool(string animBool,bool boolean)
+    {
+        animator.SetBool(animBool, boolean);
     }
 }

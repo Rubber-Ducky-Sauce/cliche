@@ -5495,6 +5495,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: enemy
       objectReference: {fileID: 0}
+    - target: {fileID: 2483627998820339266, guid: 0bc354f2d420add428072056d7d5292e, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2483627998820339267, guid: 0bc354f2d420add428072056d7d5292e, type: 3}
+      propertyPath: m_FlipX
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2483627998820339324, guid: 0bc354f2d420add428072056d7d5292e, type: 3}
       propertyPath: m_RootOrder
       value: 12
@@ -5873,6 +5881,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1548752199485173635, guid: a44eca5133cf2514fb8d19e41c298bc7, type: 3}
+      propertyPath: m_FlipX
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1548752199485173635, guid: a44eca5133cf2514fb8d19e41c298bc7, type: 3}
       propertyPath: m_SortingLayer
       value: 4
