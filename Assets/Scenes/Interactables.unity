@@ -5491,17 +5491,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2483627998603154257, guid: 0bc354f2d420add428072056d7d5292e, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2483627998603154257, guid: 0bc354f2d420add428072056d7d5292e, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2483627998603154257, guid: 0bc354f2d420add428072056d7d5292e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2483627998820339266, guid: 0bc354f2d420add428072056d7d5292e, type: 3}
       propertyPath: m_Name
       value: enemy
-      objectReference: {fileID: 0}
-    - target: {fileID: 2483627998820339266, guid: 0bc354f2d420add428072056d7d5292e, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2483627998820339267, guid: 0bc354f2d420add428072056d7d5292e, type: 3}
-      propertyPath: m_FlipX
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2483627998820339324, guid: 0bc354f2d420add428072056d7d5292e, type: 3}
       propertyPath: m_RootOrder

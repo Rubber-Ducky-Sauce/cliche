@@ -49,6 +49,7 @@ public class BackupCaller : MonoBehaviour
         yield return new WaitForSeconds(2);
         callingBackup = false;
         GameManager.Instance.PlaySound(callBackupSound);
+        baseEnemy.SetAnimTrigger("BlowHorn");
         StartCoroutine(SpawnBackup(backupEnemy));
     }
     
@@ -102,14 +103,18 @@ public class BackupCaller : MonoBehaviour
 
     IEnumerator ReadyEnemy()
     {
+        spawnedEnemy.posted = true;
         yield return new WaitForSeconds(readyTime);
+        spawnedEnemy.posted = false;
         spawnedEnemy.isActive = true;
     }
 
     IEnumerator UnReadyEnemy()
     {
         yield return new WaitForSeconds(despawnTime - 1f);
+        spawnedEnemy.posted = true;
         spawnedEnemy.isActive = false;
+        Debug.Log(spawnedEnemy.posted);
     }
 
     void FinishCall()

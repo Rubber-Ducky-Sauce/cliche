@@ -69,12 +69,14 @@ public class PlayerController : Actor
             //TryLock();
         }
         spriteRenderer.flipX = isFacingLeft;
+        animator.SetBool("isMoving", isMoving);
+        animator.SetBool("isClimbing", isClimbing);
     }
 
     private void FixedUpdate()
     {
         if(light != null)
-        light.hiding = isHiding || isSneaking;
+        light.hiding = isHiding;
         DetectGround();
     }
 
@@ -137,8 +139,8 @@ public class PlayerController : Actor
 
     private void Sneak()
     {
-
         _ = Input.GetAxis("Vertical") < 0 && !isClimbing? isSneaking = true : isSneaking = false;
+        animator.SetBool("isSneaking", isSneaking);
     }
 
     private void DetectGround()

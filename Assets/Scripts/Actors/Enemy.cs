@@ -6,6 +6,7 @@ using UnityEngine;
 public class Enemy : Actor
 {
     AudioSource audioSource;
+    private Animator animator;
     [SerializeField] AudioClip[] moveSound;
     [SerializeField] AudioClip alertSound;
     [SerializeField] AudioClip caught;
@@ -46,6 +47,7 @@ public class Enemy : Actor
     {
         player = GameObject.Find("Player");
         audioSource = GetComponent<AudioSource>();
+        animator = GetComponent<Animator>();
         alertMarker = transform.Find("AlertMarker")?.gameObject;
         startPos = transform.position.x;
         Speed = speed;
@@ -67,6 +69,7 @@ public class Enemy : Actor
         }
         if(becomeAlert)
             posted = true;
+        animator.SetBool("isPosted",posted);
     }
 
     private void FixedUpdate()
@@ -78,10 +81,10 @@ public class Enemy : Actor
         DetectEdge();
         if (!posted) {
             transform.Translate(Speed * Time.deltaTime * Vector3.right);
-            if (!walkPlaying && !alert)
-                StartCoroutine(PlayWalkingSound());
-            if (!walkPlaying  && alert)
-                StartCoroutine(PlayRunningSound());
+            //if (!walkPlaying && !alert)
+            //    StartCoroutine(PlayWalkingSound());
+            //if (!walkPlaying  && alert)
+            //    StartCoroutine(PlayRunningSound());
         }
 
     }
@@ -96,7 +99,7 @@ public class Enemy : Actor
         RaycastHit2D wallHit = Physics2D.Raycast(transform.position, wallDir, wallX, groundLayer);
         Debug.DrawRay(transform.position - new Vector3(0, .1f, 0), wallDir * wallX, Color.green);
 
-        if (hit.collider == null || wallHit.collider != null || ReachedMaxDistance())
+        if (hit.collider == null || (wallHit.collider != null && wallHit.collider.gameObject.layer == 6) || ReachedMaxDistance())
         {
             ResetMaxDistX();
             StartCoroutine(TurnAround(wallHit.collider != null ? wallPostTime: postTime));
@@ -112,6 +115,7 @@ public class Enemy : Actor
         if (hit.collider != null  && hit.collider.tag == "Player" && !IsPlayerHiding(hit.collider.gameObject))
         {
             playerFound = true;
+            animator.SetBool("playerSpotted", true);
             audioSource.PlayOneShot(alertSound);
             audioSource.PlayOneShot(caught);
             GameManager.Instance.SetKey("");
@@ -260,5 +264,15 @@ public class Enemy : Actor
         Debug.DrawRay(transform.position, direction * groundRay, Color.yellow);
 
         isOnGround = hit.collider != null;
+    }
+
+    public void SetAnimBool(string animBool, bool boolean)
+    {
+        animator.SetBool(animBool, boolean);
+    }
+
+    public void SetAnimTrigger(string animTrigger)
+    {
+        animator.SetTrigger(animTrigger);
     }
 }
