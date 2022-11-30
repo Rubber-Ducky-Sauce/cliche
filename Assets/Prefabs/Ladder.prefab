@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4117610152707583234}
   - component: {fileID: 6759069044181974071}
+  - component: {fileID: 6746745940546510995}
   m_Layer: 0
   m_Name: Ladder
   m_TagString: Untagged
@@ -49,6 +50,32 @@ MonoBehaviour:
   isSceneTrigger: 0
   IOTrigger: 0
   climbPoint: 0
+--- !u!61 &6746745940546510995
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1922359176787693212}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.015203714, y: 2.8278527}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.42226744, y: 9.331518}
+  m_EdgeRadius: 0
 --- !u!1 &2206872510178963856
 GameObject:
   m_ObjectHideFlags: 0
@@ -1403,7 +1430,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2206872511023963379}
   - component: {fileID: 2206872511294884866}
-  - component: {fileID: 2206872511294884868}
   m_Layer: 0
   m_Name: Ladder
   m_TagString: Untagged
@@ -1419,7 +1445,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2206872511294884871}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 4.98, z: 0}
   m_LocalScale: {x: 1, y: 5.04878, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1510,32 +1536,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!61 &2206872511294884868
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2206872511294884871}
-  m_Enabled: 0
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.07507044}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
-    newSize: {x: 1, y: 1}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 0.45, y: 0.8498591}
-  m_EdgeRadius: 0
 --- !u!1 &2206872511304151780
 GameObject:
   m_ObjectHideFlags: 0
@@ -3142,7 +3142,6 @@ GameObject:
   m_Component:
   - component: {fileID: 6232425853420753375}
   - component: {fileID: 6232425851548123438}
-  - component: {fileID: 6232425851548123432}
   m_Layer: 0
   m_Name: Ladder
   m_TagString: Untagged
@@ -3249,32 +3248,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!61 &6232425851548123432
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6232425851548123435}
-  m_Enabled: 0
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.07507044}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
-    newSize: {x: 1, y: 1}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 0.45, y: 0.8498591}
-  m_EdgeRadius: 0
 --- !u!1 &6232425851555233736
 GameObject:
   m_ObjectHideFlags: 0
