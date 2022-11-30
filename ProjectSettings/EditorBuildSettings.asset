@@ -9,6 +9,12 @@ EditorBuildSettings:
     path: Assets/Scenes/StartMenu.unity
     guid: f83f3e1d2b65e8543830926b9ae956f3
   - enabled: 1
+    path: Assets/Scenes/levelOne.unity
+    guid: a5d30278b7ee3554a8c8cf022da52539
+  - enabled: 1
+    path: Assets/Scenes/ThankYou.unity
+    guid: ad488d3ed4aa7bf4389b8384b005778c
+  - enabled: 0
     path: Assets/Scenes/Interactables.unity
     guid: 4359ea17ac53203468e8475a62ac538f
   - enabled: 0

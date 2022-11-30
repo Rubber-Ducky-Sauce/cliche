@@ -6,13 +6,17 @@ using UnityEngine.EventSystems;
 
 public class ButtonThroughKeySelection : MonoBehaviour
 {
-
+    Button button;
     private void Start()
     {
         EventSystem.current.SetSelectedGameObject(
                      this.gameObject);
+        button = GetComponent<Button>();
+
+        button.onClick.AddListener(() => GameManager.Instance.StartGame());
     }
 
+    
     private void Update()
     {
         if(EventSystem.current.currentSelectedGameObject == null)
@@ -20,4 +24,5 @@ public class ButtonThroughKeySelection : MonoBehaviour
                      this.gameObject);
     }
 
+    
 }

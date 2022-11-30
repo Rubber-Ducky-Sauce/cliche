@@ -50,14 +50,17 @@ TagManager:
   - name: HidingPlace
     uniqueID: 3790173903
     locked: 0
+  - name: Decor
+    uniqueID: 1368369957
+    locked: 0
+  - name: Ground
+    uniqueID: 1353753195
+    locked: 0
   - name: Player
     uniqueID: 3298357659
     locked: 0
   - name: Enemy
     uniqueID: 1486415317
-    locked: 0
-  - name: Ground
-    uniqueID: 1353753195
     locked: 0
   - name: Foreground
     uniqueID: 2578534241

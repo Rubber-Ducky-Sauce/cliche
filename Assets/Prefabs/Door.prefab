@@ -270,7 +270,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: 0.41605443}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -281,7 +281,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 1, y: 1.8321089}
   m_EdgeRadius: 0
 --- !u!1 &1735223468
 GameObject:
@@ -554,9 +554,9 @@ MonoBehaviour:
   IOTrigger: 0
   locked: 1
   keyName: Ham
-  unlockClip: {fileID: 8300000, guid: c4077d94d84d92c4cae184149a00c281, type: 3}
+  unlockClip: {fileID: 8300000, guid: da4e51ef92155b24fbf199b9467341ce, type: 3}
   failClip: {fileID: 8300000, guid: bffcf113257e74a459b33a780a9eaa0c, type: 3}
-  removalble: {fileID: 1200086907}
+  removalble: {fileID: 4624618013448787682}
 --- !u!61 &4624618013448787686
 BoxCollider2D:
   m_ObjectHideFlags: 0

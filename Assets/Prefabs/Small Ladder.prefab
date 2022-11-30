@@ -347,6 +347,7 @@ GameObject:
   - component: {fileID: 773391440891770241}
   - component: {fileID: 773391439014421872}
   - component: {fileID: 5652234151819655661}
+  - component: {fileID: -2181810813265692636}
   m_Layer: 0
   m_Name: Small Ladder
   m_TagString: Untagged
@@ -479,6 +480,21 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.41656542, y: 0.89021844}
   m_EdgeRadius: 0
+--- !u!114 &-2181810813265692636
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 773391439014421877}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3fb5b10e673fbf642aec5d7cd26e6984, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isSceneTrigger: 0
+  IOTrigger: 0
+  climbPoint: 0
 --- !u!1 &773391439131143148
 GameObject:
   m_ObjectHideFlags: 0

@@ -24,7 +24,7 @@ public abstract class Throwable : Collectable
         rigidbody.bodyType = RigidbodyType2D.Dynamic;
         
         GameManager.Instance.PlaySound(throwSound);
-        rigidbody.AddForce(new Vector2(player.isFacingLeft? -throwForce: throwForce,throwheight),ForceMode2D.Impulse);
+        rigidbody.AddForce(new Vector2(player.isFacingLeft? -throwForce: throwForce,0),ForceMode2D.Impulse);
         GetComponent<PolygonCollider2D>().isTrigger = false;
     }
 

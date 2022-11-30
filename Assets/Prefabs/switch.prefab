@@ -18,7 +18,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &2508443658023080694
 Transform:
@@ -142,7 +142,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1.52}
+  m_Size: {x: 1, y: 1.31}
   m_EdgeRadius: 0
 --- !u!114 &2508443658023080693
 MonoBehaviour:
@@ -162,3 +162,4 @@ MonoBehaviour:
   pressedSize: 0.2
   cilp1: {fileID: 8300000, guid: d2f84f18799df07428ee0b9c5b653763, type: 3}
   cilp2: {fileID: 8300000, guid: df685696869a0204eac84e5184e376f7, type: 3}
+  pressedImage: {fileID: 1988801464, guid: 18546072fa894b848a3f34fcf2b1142f, type: 3}

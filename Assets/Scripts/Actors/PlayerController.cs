@@ -60,14 +60,13 @@ public class PlayerController : Actor
         if (gameActive && playerActive)
         {
             movementSpeed = HandleSpeed();
+            Sneak();
             Move();
             JumpDown();
             Jump();
             Climb();
             Interact();
-            Sneak();
             UseItem();
-            //TryLock();
         }
         spriteRenderer.flipX = isFacingLeft;
         animator.SetBool("isMoving", isMoving);
@@ -84,7 +83,7 @@ public class PlayerController : Actor
     public override void Move()
     {
         float horizontal = Input.GetAxis("Horizontal");
-        if(!isHiding)
+
         transform.Translate(Vector3.right * horizontal * Time.deltaTime * movementSpeed);
 
         if (horizontal > 0)
@@ -92,9 +91,9 @@ public class PlayerController : Actor
         if (horizontal < 0)
             isFacingLeft = true;
 
-        isMoving = isOnGround && horizontal != 0;
-        if(!walkPlaying && isMoving && !isSneaking)
-        StartCoroutine(PlayWalkingSound());
+        isMoving = isOnGround &&  -float.Epsilon > horizontal||horizontal > float.Epsilon;
+        if (!walkPlaying && isMoving && !isSneaking)
+            StartCoroutine(PlayWalkingSound());
         if (!walkPlaying && isMoving && isSneaking)
             StartCoroutine(PlaySneakingSound());
 
@@ -113,18 +112,20 @@ public class PlayerController : Actor
     private void Climb()
     {
         float vertical = Input.GetAxis("Vertical");
-        if (vertical>0 && !isClimbing && GameManager.Instance.currentInteractable?.GetComponent<Climbable>())
+        if (GameManager.Instance.currentInteractable != null)
         {
-            isClimbing = true;
-            rigidbody.velocity = Vector3.zero;
-        }
+            if (vertical > 0 && !isClimbing && GameManager.Instance.currentInteractable.GetComponent<Climbable>())
+            {
+                isClimbing = true;
+                rigidbody.velocity = Vector3.zero;
+            }
 
-        if (isClimbing && GameManager.Instance.currentInteractable != null && GameManager.Instance.currentInteractable.GetComponent<Climbable>())
-        {
-            rigidbody.gravityScale = 0;
-            transform.Translate(1 * Time.deltaTime * vertical * Vector3.up);
+            if (isClimbing && GameManager.Instance.currentInteractable != null && GameManager.Instance.currentInteractable.GetComponent<Climbable>())
+            {
+                rigidbody.gravityScale = 0;
+                transform.Translate(1 * Time.deltaTime * vertical * Vector3.up);
+            }
         }
-
         if (GameManager.Instance.currentInteractable == null && isClimbing || vertical < 0  && isOnGround)
         {
             EndClimb();
@@ -140,7 +141,7 @@ public class PlayerController : Actor
 
     private void Sneak()
     {
-        _ = Input.GetAxis("Vertical") < 0 && !isClimbing? isSneaking = true : isSneaking = false;
+        isSneaking = Input.GetAxis("Vertical") < 0 && !isClimbing;
         animator.SetBool("isSneaking", isSneaking);
     }
 

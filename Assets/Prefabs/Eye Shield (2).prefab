@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 491833580007251988}
   - component: {fileID: 1626258401507488190}
   - component: {fileID: 4816100059573748082}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: TopBox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -105,7 +105,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5449126004285867263}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 15.26, y: -0.46, z: -0.056266382}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -152,8 +152,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -504793393
-  m_SortingLayer: 3
+  m_SortingLayerID: 1368369957
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: c48fb076e973ee042a5d3a2e90b215e7, type: 3}
   m_Color: {r: 0.4245283, g: 0.4245283, b: 0.4245283, a: 1}
@@ -222,7 +222,7 @@ MonoBehaviour:
   - {x: 0.59882545, y: 1.0325012, z: 0}
   m_ShapePathHash: 1246875237
   m_Mesh: {fileID: 0}
-  m_InstanceId: 139812
+  m_InstanceId: 105616
 --- !u!251 &724170243291438538
 PlatformEffector2D:
   m_ObjectHideFlags: 0
