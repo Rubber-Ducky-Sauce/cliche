@@ -10,6 +10,7 @@ public class PlayerController : Actor
     private AudioSource audioSource;
     private SpriteRenderer spriteRenderer;
     private Animator animator;
+    [SerializeField] private GameObject interactableNotification;
 
     public bool isHiding = false;
     public bool isSneaking = false;
@@ -208,5 +209,15 @@ public class PlayerController : Actor
     public void SetAnimBool(string animBool,bool boolean)
     {
         animator.SetBool(animBool, boolean);
+    }
+
+    public void ActivateInteractNotice()
+    {
+        interactableNotification.SetActive(true);
+    }
+
+    public void DeactivateInteractNotice()
+    {
+        interactableNotification.SetActive(false);
     }
 }

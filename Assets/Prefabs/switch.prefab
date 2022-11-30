@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2508443658023080691}
   - component: {fileID: 2508443658023080692}
   - component: {fileID: 2508443658023080693}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: switch
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -76,7 +76,7 @@ SpriteRenderer:
   m_SortingLayerID: -504793393
   m_SortingLayer: 3
   m_SortingOrder: 0
-  m_Sprite: {fileID: -9095717837082945937, guid: 207ee8102dd4143d288186ef0be518ee, type: 3}
+  m_Sprite: {fileID: -675239898, guid: 18546072fa894b848a3f34fcf2b1142f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -104,7 +104,7 @@ PolygonCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 2}
+    oldSize: {x: 1, y: 1}
     newSize: {x: 1, y: 2}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -112,18 +112,12 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 0.2693925, y: 0.94719744}
-      - {x: -0.3065176, y: 0.9188812}
-      - {x: -0.122020245, y: 0.73690414}
-      - {x: -0.11080742, y: -0.5462843}
-      - {x: -0.15280724, y: -0.87431145}
-      - {x: -0.15234375, y: -0.97265625}
-      - {x: 0, y: -1}
-      - {x: 0.15234375, y: -0.97265625}
-      - {x: 0.29296875, y: -0.90234375}
-      - {x: 0.16126585, y: -0.8041818}
-      - {x: 0.10194111, y: -0.6009164}
-      - {x: 0.10262966, y: 0.6411307}
+    - - {x: 0.20310974, y: 0.41141534}
+      - {x: -0.18499947, y: 0.40519333}
+      - {x: -0.0833559, y: 0.16798115}
+      - {x: -0.10528374, y: -0.40267265}
+      - {x: 0.09158516, y: -0.39820945}
+      - {x: 0.069488525, y: 0.17715454}
 --- !u!61 &2508443658023080692
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -137,18 +131,18 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.07568717}
+  m_Offset: {x: 0, y: -0.3}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 2}
+    oldSize: {x: 1, y: 1}
     newSize: {x: 1, y: 2}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1.8486257}
+  m_Size: {x: 1, y: 1.52}
   m_EdgeRadius: 0
 --- !u!114 &2508443658023080693
 MonoBehaviour:
@@ -165,6 +159,6 @@ MonoBehaviour:
   triggerType: 0
   hiddenObject: {fileID: 0}
   triggeredObject: {fileID: 0}
-  pressedSize: 0.73
+  pressedSize: 0.2
   cilp1: {fileID: 8300000, guid: d2f84f18799df07428ee0b9c5b653763, type: 3}
   cilp2: {fileID: 8300000, guid: df685696869a0204eac84e5184e376f7, type: 3}

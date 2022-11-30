@@ -15,6 +15,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] public Lock currentLock = null;
 
     [SerializeField] public Interactable m_currentInteractable = null;
+    [SerializeField] public string currentCheckpoint;
+
     public Interactable currentInteractable { 
         get { return m_currentInteractable; } 
         set { m_currentInteractable = value; } }
@@ -70,6 +72,14 @@ public class GameManager : MonoBehaviour
     {
         gameIsActive = true;
         musicManager.PlaySong(musicManager.level1);
+
+        //checkpoint
+        if(currentCheckpoint != "")
+        {
+            GameObject player = GameObject.Find("Player");
+            Checkpoint checkpoint = GameObject.Find(currentCheckpoint).GetComponent<Checkpoint>();
+            player.transform.position = checkpoint.transform.position;
+        }
     }
 
 public IEnumerator ReloadScene(float loadTime)
@@ -117,5 +127,10 @@ public IEnumerator ReloadScene(float loadTime)
     public void PlaySound(AudioClip clip)
     {
         audioSource.PlayOneShot(clip);
+    }
+
+    public void SetCheckpoint(string checkpoint)
+    {
+        currentCheckpoint = checkpoint;
     }
 }

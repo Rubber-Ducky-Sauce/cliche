@@ -17,6 +17,7 @@ public class HidingPlace : Interactable
     }
     public override void Interact()
     {
+        base.Interact();
         if (!player.isHiding)
         {
             StartCoroutine(QuickDisablePlayer());
@@ -34,6 +35,7 @@ public class HidingPlace : Interactable
             player.isHiding = false;
             GameManager.Instance.PlaySound(clip);
             player.SetAnimBool("isHiding", false);
+            player.ActivateInteractNotice();
         }
     }
 

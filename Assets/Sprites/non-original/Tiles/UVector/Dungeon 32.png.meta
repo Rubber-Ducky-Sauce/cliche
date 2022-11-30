@@ -33,7 +33,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -2827,15 +2827,15 @@ TextureImporter:
       Dungeon 32_35: -1578667364
       Dungeon 32_42: -970018088
       Dungeon 32_25: 1963736482
-      Dungeon 32_55: -945869173
-      Dungeon 32_100: 435820379
       Dungeon 32_120: 873615203
+      Dungeon 32_100: 435820379
+      Dungeon 32_55: -945869173
       Dungeon 32_28: 373799210
       Dungeon 32_56: -2054165238
-      Dungeon 32_84: 400991291
+      Dungeon 32_115: -519003092
       Dungeon 32_104: -2041715316
       Dungeon 32_99: 1423937108
-      Dungeon 32_115: -519003092
+      Dungeon 32_84: 400991291
       Dungeon 32_75: 795464027
       Dungeon 32_16: -1418183399
       Dungeon 32_26: 1122170241
@@ -2849,14 +2849,15 @@ TextureImporter:
       Dungeon 32_54: 523202516
       Dungeon 32_58: -1569140881
       Dungeon 32_62: 1204130154
+      Dungeon 32_119: -376304181
       Dungeon 32_102: -861396990
       Dungeon 32_23: -374628085
       Dungeon 32_67: 174780944
-      Dungeon 32_94: -735644081
       Dungeon 32_96: 732247536
+      Dungeon 32_94: -735644081
       Dungeon 32_47: -1467061889
-      Dungeon 32_95: -1483331753
       Dungeon 32_71: 85534451
+      Dungeon 32_95: -1483331753
       Dungeon 32_107: -99747161
       Dungeon 32_1: 810300544
       Dungeon 32_125: -1583631875
@@ -2865,7 +2866,6 @@ TextureImporter:
       Dungeon 32_9: 1331173827
       Dungeon 32_53: -1562666330
       Dungeon 32_105: -1933816315
-      Dungeon 32_119: -376304181
       Dungeon 32_4: -1195069455
       Dungeon 32_27: 584932963
       Dungeon 32_48: -1297605393
@@ -2876,8 +2876,8 @@ TextureImporter:
       Dungeon 32_19: -1950108235
       Dungeon 32_24: 359640611
       Dungeon 32_59: -2114016028
-      Dungeon 32_17: 1274235785
       Dungeon 32_113: -310871299
+      Dungeon 32_17: 1274235785
       Dungeon 32_61: 1726068752
       Dungeon 32_86: -439882353
       Dungeon 32_11: 484165230

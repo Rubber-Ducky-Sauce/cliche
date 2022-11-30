@@ -6,8 +6,9 @@ public class Climbable : Interactable
 {
     [SerializeField] float climbPoint;
 
-    public override void Interact()
+    public override void TriggerEnter(GameObject player)
     {
-        //
+        base.TriggerEnter(player);
+        iPlayer.DeactivateInteractNotice();
     }
 }
