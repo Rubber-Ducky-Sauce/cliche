@@ -1,7 +1,9 @@
 <h1>Another Castle</h1>
 <hr>
+
 <p>A Retro style Stealth platformer in which, our hero, The Princess, must escape another castle using tactics the like of Super Mario and Solid Snake</P>
 <hr>
+
 <h2>Player</h2>
 <p> The player controller inherits from an Actor script, providing movement and base speed.</P>
 <p> Player requires an audiosource, rigidBody component, animator and sprite renderer.</P>
