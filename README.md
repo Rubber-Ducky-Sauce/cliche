@@ -16,3 +16,17 @@
 <h3>Hiding</h3>
 <p> The player can interact with Hide Interactables that render her invisble to enemies</P>
 <p> The player can can also sneak, slowing down her movement but allowing her to creep behind enemies without being heard</P>
+<hr>
+
+<h2>Enemies</h2>
+<p> Enemies also require auidiosource, several audio clips, animator, an "alert" sprite object, and an Ignore layer set to "Interactable"</P>
+<p> The enemy Script contains logic for movement, detecting walls/ground and detecting the player with a raycast. The enemy defaults to moving back and forth until they hit a wall or gap in the ground but may be set to pace back and forth a specific distance</P>
+<p> The enemy script has public methods that can be called from other attached scripts. The methods handle the enemy being alerted, being distracted and settling down</P>
+<h3>HearPlayer</h3>
+<p> The HearPlayerScript sets the enemy to alert based on player movement and proximity</P>
+<h3>ShowDistances</h3>
+<p> The ShowDistances script allows a live visual of enemy movement, sight and hearing distance of enemies for easier modification</P>
+<hr>
+
+<h2>GameManager</h2>
+<p> </P>
