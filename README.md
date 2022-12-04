@@ -28,5 +28,36 @@
 <p> The ShowDistances script allows a live visual of enemy movement, sight and hearing distance of enemies for easier modification</P>
 <hr>
 
-<h2>GameManager</h2>
-<p> </P>
+<
+<h2>GameManager and Management</h2>
+<p> The Game Manager is set as an instance, handles many tasks.</P>
+<p> Plays oneshot sounds from objects no longer able to do so.</P>
+<p> Handles Current Interactable, for player, as well as active key</P>
+<p> Handles Current CheckPoint when player is caught. is a string value</P>
+<p> Holds current collectable to store for refeerence in UI</P>
+<p> Is connected to Instance of Music Manager</P>
+<p> Handles scene management </P>
+
+<h3>ButtonThroughKeySelection</3>
+<p> Ensures a Start Menu button will always be selected</P>
+
+<h3>CutSceneManagement</h3>
+<p> Dialog System not yet complete</p>
+<p> SceneDirector to be used with Timeline Component to trigger GameManager gameActive boolean and scene management</p>
+<p> CutsceneTrigger triggers sceneDirectors/cutscene to active. Ther are two versions. A collider based, that will trigger on player collision and an interactable that will trigger on player's interact action of connect interactable</p>
+<hr>
+
+<h2>Level Objects</h3>
+<p> Checkpoints set in the hierarchy, trigger state change. On level restart, game finds this object and location to set player position</p>
+<p> SceneTrigger is a collider based scene management tool</p>
+<p> Interactable, abstract class. Sets GM state. When player is within collider, player may "interact" using method of GM currentInteractable</p>
+<p> Collectable, abstract class. populates UI element. Only one collectable can be held. When a second collectable is attained, the last is tossed aside, ready to be collected again, but now with a RigidBody</p>
+<p> Climables are interactables that when activated(by going up) change gravity settings</p>
+<p>Throwable, an abstract collectable that the player can toss forward away from them</p>
+<p> The Coin is a throwable item that distracts an enemy, stopping them from being able to spot the player for a short time</p>
+<p> EyeShield has been depracated</p>
+<p> HidingPlace, allows player to hide from enemy view until moving from hiding</p>
+<p> Key and Lock scripts contain strings, when matched set a trigger on player activation</p>
+<p> Light Controller applies a light that follows player to help simulate hiding</p>
+<p> Switch is a player activated trigger meant for a physical switch or button the player is to jump on</p>
+<p> WANDERING EYE, almost an enemy, the wandering eye scans a distance with a thin raycast in order to spot the player. Other colliders can impede view. A light should be attached to this for the player to notice where the ray is pointing</p>
