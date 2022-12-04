@@ -28,7 +28,6 @@
 <p> The ShowDistances script allows a live visual of enemy movement, sight and hearing distance of enemies for easier modification</P>
 <hr>
 
-<
 <h2>GameManager and Management</h2>
 <p> The Game Manager is set as an instance, handles many tasks.</P>
 <p> Plays oneshot sounds from objects no longer able to do so.</P>
@@ -61,3 +60,34 @@
 <p> Light Controller applies a light that follows player to help simulate hiding</p>
 <p> Switch is a player activated trigger meant for a physical switch or button the player is to jump on</p>
 <p> WANDERING EYE, almost an enemy, the wandering eye scans a distance with a thin raycast in order to spot the player. Other colliders can impede view. A light should be attached to this for the player to notice where the ray is pointing</p>
+<hr>
+
+<h2>Level Building</h2>
+<p> Level make-up is being handled with Tilemaps using several layers</p>
+<ul>
+  <li>background</li>
+  <li>backgrounddecoration</li>
+  <li>interactables</li>
+  <li>foreground</li>
+  <li>foregrounddecoration</li>
+</ul>
+<hr>
+
+Purchased/Borrowed Assets
+Music
+
+JDB-GlintJDB-Glint by JDB Artist
+Midnight Creeping Composed by Jonathan Shaw
+Visual Art
+
+key and diamond from Items by Simirk
+Tiles and crates by Hamdirizal 
+smoke(mineral) by 7Soul
+Sound FX
+
+Female RPG Voice Starte Pack by cicifyre
+goblin sound pack by artisticdude
+various sounds by ZStriefel
+footsteps sounds by Estudiocafofo
+SteamWhistle sound by bart 
+
