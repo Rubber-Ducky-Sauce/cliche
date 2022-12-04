@@ -73,21 +73,21 @@
 </ul>
 <hr>
 
-Purchased/Borrowed Assets
-Music
+<h2>Purchased/Borrowed Assets</h2>
+<h3>Music</h3>
+<p>JDB-GlintJDB-Glint by JDB Artist</P>
+<p>Midnight Creeping Composed by Jonathan Shaw</P>
 
-JDB-GlintJDB-Glint by JDB Artist
-Midnight Creeping Composed by Jonathan Shaw
-Visual Art
+<h3>Visual Art</h3>
 
-key and diamond from Items by Simirk
-Tiles and crates by Hamdirizal 
-smoke(mineral) by 7Soul
-Sound FX
+<p>key and diamond from Items by Simirk</P>
+<p>Tiles and crates by Hamdirizal </P>
+<p>smoke(mineral) by 7Soul</P>
 
-Female RPG Voice Starte Pack by cicifyre
-goblin sound pack by artisticdude
-various sounds by ZStriefel
-footsteps sounds by Estudiocafofo
-SteamWhistle sound by bart 
+<h3>Sound FX</h3>
 
+<p>Female RPG Voice Starte Pack by cicifyre</P>
+<p>goblin sound pack by artisticdude</P>
+<p>various sounds by ZStriefel</P>
+<p>footsteps sounds by Estudiocafofo</P>
+<p>SteamWhistle sound by bart </P>
