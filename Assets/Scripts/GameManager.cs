@@ -133,4 +133,9 @@ public IEnumerator ReloadScene(float loadTime)
     {
         currentCheckpoint = checkpoint;
     }
+
+    public void ConsoleText(string text)
+    {
+        Debug.Log(text);
+    }
 }
