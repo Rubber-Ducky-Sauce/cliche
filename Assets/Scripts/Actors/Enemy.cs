@@ -7,6 +7,7 @@ public class Enemy : Actor
 {
     AudioSource audioSource;
     private Animator animator;
+    private Rigidbody2D rb;
     [SerializeField] AudioClip[] moveSound;
     [SerializeField] AudioClip alertSound;
     [SerializeField] AudioClip caught;
@@ -40,11 +41,14 @@ public class Enemy : Actor
 
     public bool distracted = false;
     public bool becomeAlert = false;
+    //For Log Testing
+    public bool testObject = false;
 
 
     // Start is called before the first frame update
     void Start()
     {
+        rb = GetComponent<Rigidbody2D>();
         player = GameObject.Find("Player");
         audioSource = GetComponent<AudioSource>();
         animator = GetComponent<Animator>();
@@ -75,7 +79,14 @@ public class Enemy : Actor
     private void FixedUpdate()
     {
         DetectGround();
+        ActivateOnProximity();
     }
+
+    private void ActivateOnProximity()
+    {
+        isActive = Vector2.Distance(transform.position, player.transform.position) < 10f;
+    }
+
     public override void Move()
     {
         DetectEdge();
@@ -226,27 +237,27 @@ public class Enemy : Actor
         StartCoroutine(BeingDistracted(distractionTime));
     }
 
-    IEnumerator PlayRunningSound()
-    {
-        walkPlaying = true;
-        AudioClip walkingClip = moveSound[Random.Range(0, moveSound.Length)];
-        audioSource.PlayOneShot(walkingClip);
+    //IEnumerator PlayRunningSound()
+    //{
+    //    walkPlaying = true;
+    //    AudioClip walkingClip = moveSound[Random.Range(0, moveSound.Length)];
+    //    audioSource.PlayOneShot(walkingClip);
 
-        yield return new WaitForSeconds(.35f);
+    //    yield return new WaitForSeconds(.35f);
 
-        walkPlaying = false;
-    }
+    //    walkPlaying = false;
+    //}
 
-    IEnumerator PlayWalkingSound()
-    {
-        walkPlaying = true;
-        AudioClip walkingClip = moveSound[Random.Range(0, moveSound.Length)];
-        audioSource.PlayOneShot(walkingClip);
+    //IEnumerator PlayWalkingSound()
+    //{
+    //    walkPlaying = true;
+    //    AudioClip walkingClip = moveSound[Random.Range(0, moveSound.Length)];
+    //    audioSource.PlayOneShot(walkingClip);
 
-        yield return new WaitForSeconds(.7f);
+    //    yield return new WaitForSeconds(.7f);
 
-        walkPlaying = false;
-    }
+    //    walkPlaying = false;
+    //}
 
     IEnumerator SuddenShock()
     {
